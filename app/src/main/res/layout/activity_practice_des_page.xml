@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PracticeDesPageActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_marginTop="50dp"
+            android:layout_height="200dp"
+            android:src="@drawable/multipe_choice_img"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/radius_background"
+            android:layout_margin="20dp"
+            android:padding="10dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="For each question, there will be 4 choices, but only 1 correct answer, Choose your best answer A, B, C or D \n \n Với mỗi câu hỏi, sẽ có 4 sự lựa chọn, nhưng chỉ có 1 đáp án chính xác, chọn đáp án đúng nhất  A, B, C, D"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số câu:"/>
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/btStartPractice"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:textColor="#fff"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/radius_button_background"
+            android:text="Bắt đầu nào"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
+

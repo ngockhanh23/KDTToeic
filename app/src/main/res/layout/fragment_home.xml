@@ -1,0 +1,328 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context="fragment.HomeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/ivSlide"
+            android:layout_width="match_parent"
+            android:layout_height="166dp"
+            android:src="@drawable/slider"
+            />
+        <!--content_1-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+            <TextView
+                android:id="@+id/tvListeningTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nghe Hiểu"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvListeningTitle"
+                android:columnCount="3">
+
+
+                <!--item_1-->
+                <LinearLayout
+                    android:id="@+id/btImageDes"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/radius_background"
+                    tools:ignore="MissingConstraints"
+                    android:elevation="5dp"
+                    android:padding="5dp"
+                    android:layout_margin="10dp">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/mota_hinhanh_icon"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mô tả hình ảnh"
+                        android:gravity="center"
+                        android:paddingTop="10dp"/>
+                </LinearLayout>
+                <!-- end_item_1-->
+                <!--item_2-->
+                <LinearLayout
+                    android:id="@+id/btAskAndAnswer"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/radius_background"
+                    tools:ignore="MissingConstraints"
+                    android:elevation="5dp"
+                    android:padding="5dp"
+                    android:layout_margin="10dp">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/hoi_dap_icon"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hỏi &amp; Đáp"
+                        android:gravity="center"
+                        android:paddingTop="10dp"/>
+                </LinearLayout>
+                <!-- end_item_2-->
+                <!--item_3-->
+                <LinearLayout
+                    android:id="@+id/btConversation"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/radius_background"
+                    tools:ignore="MissingConstraints"
+                    android:elevation="5dp"
+                    android:padding="5dp"
+                    android:layout_margin="10dp">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/nghe_hieu_icon"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đoạn hội thoại"
+                        android:gravity="center"
+                        android:paddingTop="10dp"/>
+                </LinearLayout>
+                <!-- end_item_3-->
+
+            </GridLayout>
+
+
+        </RelativeLayout>
+
+        <!-- end content_1-->
+
+
+        <!--content_2-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+            <TextView
+                android:id="@+id/ReadingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đọc hiểu"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ReadingTitle"
+                android:columnCount="3">
+
+                <!--item_1-->
+                <LinearLayout
+                    android:id="@+id/btFillSentence"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/radius_background"
+                    tools:ignore="MissingConstraints"
+                    android:elevation="5dp"
+                    android:padding="5dp"
+                    android:layout_margin="10dp">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/reading_1_icon"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Điền vào câu"
+                        android:gravity="center"
+                        android:paddingTop="10dp"/>
+                </LinearLayout>
+                <!-- end_item_1-->
+                <!--item_2-->
+                <LinearLayout
+                    android:id="@+id/btFillParagraph"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/radius_background"
+                    tools:ignore="MissingConstraints"
+                    android:elevation="5dp"
+                    android:padding="5dp"
+                    android:layout_margin="10dp">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/reading_2_icon"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Điền vào đoạn văn"
+                        android:gravity="center"
+                        android:paddingTop="10dp"/>
+                </LinearLayout>
+                <!-- end_item_2-->
+                <!--item_3-->
+                <LinearLayout
+                    android:id="@+id/btReadAndUndersand"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/radius_background"
+                    tools:ignore="MissingConstraints"
+                    android:elevation="5dp"
+                    android:padding="5dp"
+                    android:layout_margin="10dp">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/reading_3_icon"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Đọc hiểu đoạn văn"
+                        android:gravity="center"
+                        android:paddingTop="10dp"/>
+                </LinearLayout>
+                <!-- end_item_3-->
+
+            </GridLayout>
+
+
+        </RelativeLayout>
+        <!-- end content_2-->
+
+        <!--content_3-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+            <TextView
+                android:id="@+id/PracticeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Luyện thi"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/PracticeTitle"
+                android:columnCount="3">
+
+                <!--item_1-->
+                <LinearLayout
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/radius_background"
+                    tools:ignore="MissingConstraints"
+                    android:elevation="5dp"
+                    android:padding="5dp"
+                    android:layout_margin="10dp">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/practice_1_icon"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thi thử"
+                        android:gravity="center"
+                        android:paddingTop="10dp"/>
+                </LinearLayout>
+                <!-- end_item_1-->
+                <!--item_2-->
+                <LinearLayout
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/radius_background"
+                    tools:ignore="MissingConstraints"
+                    android:elevation="5dp"
+                    android:padding="5dp"
+                    android:layout_margin="10dp">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/practice_2_icon"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lý thuyết"
+                        android:gravity="center"
+                        android:paddingTop="10dp"/>
+                </LinearLayout>
+                <!-- end_item_2-->
+                <!--item_3-->
+                <LinearLayout
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/radius_background"
+                    tools:ignore="MissingConstraints"
+                    android:elevation="5dp"
+                    android:padding="5dp"
+                    android:layout_margin="10dp">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/baseline_edit_note_24"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ghi chú"
+                        android:gravity="center"
+                        android:paddingTop="10dp"/>
+                </LinearLayout>
+                <!-- end_item_3-->
+
+            </GridLayout>
+
+
+        </RelativeLayout>
+        <!-- end content_3-->
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,132 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="fragment.HomeFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/logo"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/line_bottom_setting">
+                <Button
+                    android:id="@+id/btLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="30dp"
+                    android:text="Đăng nhập"
+                    android:background="@drawable/line_right_setting"
+                    android:textColor="#009688"
+                    android:cursorVisible="true"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:id="@+id/btRegis"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="30dp"
+                    android:textColor="#009688"
+                    android:text="Đăng kí"
+                    android:background="@drawable/line_bottom_setting"
+                    android:cursorVisible="true"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:cursorVisible="true"
+            android:background="@drawable/line_bottom_setting"
+            >
+
+            <Button
+                android:id="@+id/btInterface"
+                android:paddingLeft="30dp"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line_bottom_setting"
+                android:drawableLeft="@drawable/ic_baseline_dark_mode_24"
+                android:drawablePadding="40dp"
+                android:text="Giao diện tối"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textColor="#000000" />
+
+            <Switch
+                android:id="@+id/switchInterFace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="48dp"
+                android:minHeight="48dp" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btDownload"
+            android:paddingLeft="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quản lí tải xuống"
+            android:textAlignment="textStart"
+            android:textColor="#000000"
+            android:cursorVisible="true"
+            android:drawableLeft="@drawable/ic_baseline_download_for_offline_24"
+            android:drawablePadding="40dp"
+            android:background="@drawable/line_bottom_setting"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btAnswer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line_bottom_setting"
+            android:cursorVisible="true"
+            android:drawableLeft="@drawable/ic_baseline_lightbulb_24"
+            android:drawablePadding="40dp"
+            android:paddingLeft="30dp"
+            android:text="Giao diện đáp án"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/btRemind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/line_bottom_setting"
+            android:cursorVisible="true"
+            android:drawableLeft="@drawable/ic_baseline_menu_book_24"
+            android:drawablePadding="40dp"
+            android:paddingLeft="30dp"
+            android:text="Nhắc nhở học tập"
+            android:textAlignment="textStart"
+
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+    </LinearLayout>
+
+</ScrollView>
