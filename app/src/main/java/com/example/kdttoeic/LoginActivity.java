@@ -22,17 +22,17 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("ĐĂNG NHẬP");
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
-        btLogin = findViewById(R.id.btLogin);
-        btLogin.setOnClickListener(new View.OnClickListener() {
-            boolean isEmpty = etEmail.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty();
-            @Override
-            public void onClick(View v) {
-                if(isEmpty){
-                    Toast.makeText(LoginActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-
-                }
-            }
-        });
+        //btLogin = findViewById(R.id.btLogin);
+//        btLogin.setOnClickListener(new View.OnClickListener() {
+//            boolean isEmpty = etEmail.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty();
+//            @Override
+//            public void onClick(View v) {
+//                if(isEmpty){
+//                    Toast.makeText(LoginActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+//
+//                }
+//            }
+//        });
 
         tvRegisterLink = findViewById(R.id.tvRegisterLink);
         tvRegisterLink.setOnClickListener(new View.OnClickListener() {

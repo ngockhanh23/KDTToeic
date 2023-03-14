@@ -42,6 +42,6 @@ public class RegisterActivity extends AppCompatActivity {
         etPhone = findViewById(R.id.etPhone);
         etPassword = findViewById(R.id.etPassword);
         etConfrimPass = findViewById(R.id.etConfrimPass);
-        btRegis = findViewById(R.id.btRegis);
+        //btRegis = findViewById(R.id.btRegis);
     }
 }

@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.kdttoeic.NoteActivity;
+import com.example.kdttoeic.PracFillSentenceActivity;
 import com.example.kdttoeic.PracticeDesPageActivity;
 import com.example.kdttoeic.R;
 import com.example.kdttoeic.RegisterActivity;
@@ -19,7 +21,7 @@ import com.example.kdttoeic.RegisterActivity;
 
 public class HomeFragment extends Fragment {
 
-    LinearLayout btImageDes, btAskAndAnswer, btConversation, btFillSentence,btFillParagraph, btReadAndUndersand;
+    LinearLayout btImageDes, btAskAndAnswer, btConversation, btFillSentence,btFillParagraph, btReadAndUndersand, btTakeNote;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,7 @@ public class HomeFragment extends Fragment {
         btFillSentence = view.findViewById(R.id.btFillSentence);
         btFillParagraph = view.findViewById(R.id.btFillParagraph);
         btReadAndUndersand = view.findViewById(R.id.btReadAndUndersand);
-
+        btTakeNote = view.findViewById(R.id.btTakeNote);
 
 
         btImageDes.setOnClickListener(onclickOption());
@@ -46,7 +48,7 @@ public class HomeFragment extends Fragment {
         btFillSentence.setOnClickListener(onclickOption());
         btFillParagraph.setOnClickListener(onclickOption());
         btReadAndUndersand.setOnClickListener(onclickOption());
-
+        btTakeNote.setOnClickListener(onclickOption());
         return view;
     }
     private View.OnClickListener onclickOption(){
@@ -72,6 +74,10 @@ public class HomeFragment extends Fragment {
                     case R.id.btReadAndUndersand:
                         openReadAndUndersand();
                         break;
+                    case R.id.btTakeNote:
+                        Intent i = new Intent(getActivity(), NoteActivity.class);
+                        startActivity(i);
+                        break;
 
                 }
             }
@@ -91,7 +97,7 @@ public class HomeFragment extends Fragment {
         startActivity(intent);
     }
     private void openFillSentence(){
-        Intent intent = new Intent(getActivity(),PracticeDesPageActivity.class);
+        Intent intent = new Intent(getActivity(), PracFillSentenceActivity.class);
         startActivity(intent);
     }
     private void openFillParagraph(){

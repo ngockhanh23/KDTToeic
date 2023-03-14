@@ -13,4 +13,16 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+<!--    Dark mode-->
+<!--    Screen background id light mode off-->
+    <style name="SCREEN">
+        <item name="android:background">#FFF</item>
+    </style>
+
+<!--    Texts bacground if light mode off-->
+    <style name="TEXT">
+        <item name="android:textColor">#27302F</item>
+    </style>
+
 </resources>
