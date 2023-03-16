@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PracFillSentenceActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/radius_background"
+        android:padding="30dp">
+
+        <ImageView
+            android:id="@+id/imIcon"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:src="@drawable/reading_1_icon"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        Số câu đã làm-->
+        <TextView
+            android:id="@+id/tvDoneSentence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+
+            android:text="Số câu đã làm"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/imIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/SetenceCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="0"
+            android:textColor="#000000"
+            app:layout_constraintLeft_toRightOf="@+id/tvDoneSentence"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        Trả lời đúng-->
+        <TextView
+            android:id="@+id/tvAnwserRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:text="Trả lời đúng"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/imIcon"
+            app:layout_constraintTop_toBottomOf="@id/tvDoneSentence" />
+
+        <TextView
+            android:id="@+id/AnwserCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="0"
+            android:textColor="#000000"
+            app:layout_constraintLeft_toRightOf="@id/tvAnwserRight"
+            app:layout_constraintTop_toBottomOf="@id/SetenceCount" />
+
+        <!--        Hoàn thành-->
+        <TextView
+            android:id="@+id/tvDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:text="Hoàn thành"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/imIcon"
+            app:layout_constraintTop_toBottomOf="@id/tvAnwserRight" />
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="34dp"
+            android:layout_marginTop="10dp"
+            android:progressBackgroundTint="#03B5A4"
+            app:layout_constraintLeft_toRightOf="@+id/tvDone"
+            app:layout_constraintTop_toBottomOf="@id/AnwserCount" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    Hiển thị câu hỏi-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/radius_background"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Câu hỏi"
+                android:textColor="#0B6159"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvEnglish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="haha"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvTiengViet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="haha"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Số câu hỏi:"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/snAmountQuestion"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btStartExam"
+        android:layout_width="300dp"
+
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/custom_button"
+        android:text="Bắt đầu nào"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+</LinearLayout>

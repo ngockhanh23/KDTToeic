@@ -22,7 +22,7 @@
             android:name=".NoteEditActivity"
             android:exported="false">
             <meta-data
-                android:name="android.app.lib_name"
+                android:name="android.app.li*-b_name"
                 android:value="" />
         </activity>
         <activity
