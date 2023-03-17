@@ -18,6 +18,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.kdttoeic.adapter.NoteAdapter;
+import com.example.kdttoeic.model.Note;
+
 import java.util.ArrayList;
 
 public class NoteActivity extends AppCompatActivity implements NoteAdapter.Listener {

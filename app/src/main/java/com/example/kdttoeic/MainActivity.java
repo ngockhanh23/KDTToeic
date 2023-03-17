@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import fragment.HomeFragment;
-import fragment.JourneyFragment;
+import fragment.SearchFragment;
 import fragment.SettingFragment;
 import fragment.TestFragment;
 
@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
                         actionBar.setTitle(item.getTitle().toString());
                         loadFragment(new TestFragment());
                         return true;
-                    case R.id.mnJourney:
+                    case R.id.mnSearch:
                         actionBar.setTitle(item.getTitle().toString());
-                        loadFragment(new JourneyFragment());
+                        loadFragment(new SearchFragment());
                         return true;
                     case R.id.mnSetting:
                         actionBar.setTitle(item.getTitle().toString());

@@ -21,7 +21,7 @@ import com.example.kdttoeic.RegisterActivity;
 
 public class HomeFragment extends Fragment {
 
-    LinearLayout btImageDes, btAskAndAnswer, btConversation, btFillSentence,btFillParagraph, btReadAndUndersand, btTakeNote;
+    LinearLayout btImageDes, btAskAndAnswer, btConversation, btFillSentence,btFillParagraph, btReadAndUndersand, btTakeNote, btTest;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +40,8 @@ public class HomeFragment extends Fragment {
         btFillParagraph = view.findViewById(R.id.btFillParagraph);
         btReadAndUndersand = view.findViewById(R.id.btReadAndUndersand);
         btTakeNote = view.findViewById(R.id.btTakeNote);
+        btTest = view.findViewById(R.id.btTest);
+
 
 
         btImageDes.setOnClickListener(onclickOption());
@@ -49,6 +51,7 @@ public class HomeFragment extends Fragment {
         btFillParagraph.setOnClickListener(onclickOption());
         btReadAndUndersand.setOnClickListener(onclickOption());
         btTakeNote.setOnClickListener(onclickOption());
+        btTest.setOnClickListener(onclickOption());
         return view;
     }
     private View.OnClickListener onclickOption(){
@@ -78,6 +81,8 @@ public class HomeFragment extends Fragment {
                         Intent i = new Intent(getActivity(), NoteActivity.class);
                         startActivity(i);
                         break;
+                    case R.id.btTest:
+                        openTestFragment();
 
                 }
             }
@@ -107,6 +112,12 @@ public class HomeFragment extends Fragment {
     private void openReadAndUndersand(){
         Intent intent = new Intent(getActivity(),PracticeDesPageActivity.class);
         startActivity(intent);
+    }
+
+    private void openTestFragment(){
+        Intent intent = new Intent(getActivity(), TestFragment.class);
+        startActivity(intent);
+        
     }
 
 

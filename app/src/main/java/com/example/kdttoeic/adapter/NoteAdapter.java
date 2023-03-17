@@ -1,4 +1,4 @@
-package com.example.kdttoeic;
+package com.example.kdttoeic.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.kdttoeic.R;
+import com.example.kdttoeic.model.Note;
 
 import java.util.ArrayList;
 

@@ -246,6 +246,7 @@
 
                 <!--item_1-->
                 <LinearLayout
+                    android:id="@+id/btTest"
                     android:layout_width="110dp"
                     android:layout_height="110dp"
                     android:gravity="center"
@@ -270,24 +271,25 @@
                 <!-- end_item_1-->
                 <!--item_2-->
                 <LinearLayout
+                    android:id="@+id/tbVocabulary"
                     android:layout_width="110dp"
                     android:layout_height="110dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:background="@drawable/radius_background"
-                    tools:ignore="MissingConstraints"
+
                     android:elevation="5dp"
                     android:padding="5dp"
                     android:layout_margin="10dp">
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/practice_2_icon"
+                        android:src="@drawable/baseline_translate_24"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lý thuyết"
+                        android:text="Từ vựng"
                         android:gravity="center"
                         android:paddingTop="10dp"/>
                 </LinearLayout>

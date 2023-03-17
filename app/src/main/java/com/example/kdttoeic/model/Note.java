@@ -1,4 +1,4 @@
-package com.example.kdttoeic;
+package com.example.kdttoeic.model;
 
 import java.io.Serializable;
 
