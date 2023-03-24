@@ -92,7 +92,7 @@ public class NoteActivity extends AppCompatActivity implements NoteAdapter.Liste
         rvNotes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         getSupportActionBar().setTitle("Ghi chú");
-        //Hiệ dấu mũi tên quay về
+        //Hiện dấu mũi tên quay về
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
