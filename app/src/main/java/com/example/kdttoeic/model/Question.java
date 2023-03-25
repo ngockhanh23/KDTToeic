@@ -17,7 +17,7 @@ public class Question implements Serializable {
     int questionCat;
 
 
-    public Question(int id, String content, String image, String audio, String opA, String opB, String opC, String opD, int answer, int level, int love,int questionCat) {
+    public Question(int id, String content, String image, String audio, String opA, String opB, String opC, String opD, int answer, int level, int love, int questionCat) {
         this.id = id;
         this.content = content;
         this.image = image;
@@ -128,10 +128,5 @@ public class Question implements Serializable {
         this.love = love;
     }
 
-
-<<<<<<< HEAD
-}
-=======
 }
 
->>>>>>> origin/main
