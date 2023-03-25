@@ -14,8 +14,13 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/imagequetion"/>
 
         <TextView
+            android:id="@+id/tvQuestionPractice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/question_background"
@@ -28,12 +33,14 @@
 
 
         <RadioGroup
+            android:id="@+id/rgOptionsQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:orientation="vertical">
 
             <RadioButton
+                android:id="@+id/rbOpA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -42,6 +49,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <RadioButton
+                android:id="@+id/rbOpB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -50,6 +58,7 @@
                 android:textSize="20dp" />
 
             <RadioButton
+                android:id="@+id/rbOpC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -58,6 +67,7 @@
                 android:textSize="20dp" />
 
             <RadioButton
+                android:id="@+id/rbOpD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -78,6 +88,7 @@
 
 
             <Button
+                android:id="@+id/btNextQuestion"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"

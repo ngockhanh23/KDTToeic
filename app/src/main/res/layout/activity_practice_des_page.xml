@@ -38,6 +38,7 @@
                 android:text="Số câu:"/>
 
             <Spinner
+                android:id="@+id/spQuestionCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
