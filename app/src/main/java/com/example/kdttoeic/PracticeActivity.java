@@ -140,13 +140,11 @@ public class PracticeActivity extends AppCompatActivity {
 
     void AddQuestion(){
         lstQuestion = new ArrayList<>();
-        lstQuestion.add(new Question("Who are all ________ people?", "this","those","them","that",2));
-        lstQuestion.add(new Question("I ____ a car next year", "buy","am buying","going to buy","bought",2));
-        lstQuestion.add(new Question("When do you go _____ bed?", "to","to the","in","in the",1));
-        lstQuestion.add(new Question("London is famous for _____ red buses", "it's","its","it","is it",2));
-        lstQuestion.add(new Question("Is there _____ milk in the fridge?", "a lot ","many","much","some",4));
-
-
+        lstQuestion.add(new Question(1,"Who are all ________ people?", "","","this","those","them","that",2,1,0,1));
+        lstQuestion.add(new Question(2,"I ____ a car next year", "","","buy","am buying","going to buy","bought",2,2,0,1));
+        lstQuestion.add(new Question(3,"When do you go _____ bed?","","" ,"to","to the","in","in the",1,2,0,1));
+        lstQuestion.add(new Question(4,"London is famous for _____ red buses","","", "it's","its","it","is it",2,1,0,1));
+        lstQuestion.add(new Question(5,"Is there _____ milk in the fridge?","","", "a lot ","many","much","some",4,2,1,3));
 
     }
 }
