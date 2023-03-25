@@ -17,6 +17,7 @@ import com.example.kdttoeic.PracFillSentenceActivity;
 import com.example.kdttoeic.PracticeDesPageActivity;
 import com.example.kdttoeic.R;
 import com.example.kdttoeic.RegisterActivity;
+import com.example.kdttoeic.VocabCatActivity;
 
 
 public class HomeFragment extends Fragment {
@@ -83,7 +84,10 @@ public class HomeFragment extends Fragment {
                         break;
                     case R.id.btTest:
                         openTestFragment();
-
+                    case R.id.tbVocabulary:
+                        Intent i1 = new Intent(getActivity(), VocabCatActivity.class);
+                        startActivity(i1);
+                        break;
                 }
             }
         };

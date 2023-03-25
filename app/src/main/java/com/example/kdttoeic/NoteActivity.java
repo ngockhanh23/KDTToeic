@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.kdttoeic.Data.KDTToeicDB;
 import com.example.kdttoeic.adapter.NoteAdapter;
 import com.example.kdttoeic.model.Note;
 
@@ -28,20 +29,24 @@ public class NoteActivity extends AppCompatActivity implements NoteAdapter.Liste
     RecyclerView rvNotes;
     ArrayList<Note> notes;
     NoteAdapter noteAdapter;
+    KDTToeicDB kdtToeicDB;
     int index;
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
             if (result.getResultCode() == 2003) {
                 Note note = (Note) result.getData().getSerializableExtra("note");
-                notes.set(index, note);
+                kdtToeicDB.updateNote(note.getId(), note.getTitle(), note.getContent());
+                notes.clear();
+                notes.addAll(kdtToeicDB.getNote());
                 noteAdapter.notifyDataSetChanged();
             }
             if (result.getResultCode() == 2004) {
                 Note note = (Note) result.getData().getSerializableExtra("note");
-                notes.add(note);
+                kdtToeicDB.insertNote(note.getTitle(), note.getContent());
+                notes.clear();
+                notes.addAll(kdtToeicDB.getNote());
                 noteAdapter.notifyDataSetChanged();
-
             }
         }
     });
@@ -75,16 +80,17 @@ public class NoteActivity extends AppCompatActivity implements NoteAdapter.Liste
         setContentView(R.layout.activity_note);
 
         rvNotes = findViewById(R.id.rvNotes);
-
+        kdtToeicDB = new KDTToeicDB(NoteActivity.this);
         notes = new ArrayList<>();
-        Note note = new Note(1, "Khánh ròm", "Tuổi con ngang con");
-        notes.add(note);
-        note = new Note(2, "Khải", "Trong cơn mơ a là chàng tỉ phú, tỉnh cơn lú anh là chú báo con");
-        notes.add(note);
-        note = new Note(3, "Đức", "Lớn già đầu còn bị dụ mất acc");
-        notes.add(note);
-        note = new Note(4, "Triều", "trieudeptrai123 đến là đón đụng là chạm");
-        notes.add(note);
+//        Note note = new Note(1, "Khánh ròm", "Tuổi con ngang con");
+//        notes.add(note);
+//        note = new Note(2, "Khải", "Trong cơn mơ a là chàng tỉ phú, tỉnh cơn lú anh là chú báo con");
+//        notes.add(note);
+//        note = new Note(3, "Đức", "Lớn già đầu còn bị dụ mất acc");
+//        notes.add(note);
+//        note = new Note(4, "Triều", "trieudeptrai123 đến là đón đụng là chạm");
+        //notes.add(note);
+        notes = kdtToeicDB.getNote();
 
         noteAdapter = new NoteAdapter(notes, this);
         rvNotes.setAdapter(noteAdapter);
@@ -112,8 +118,16 @@ public class NoteActivity extends AppCompatActivity implements NoteAdapter.Liste
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                notes.remove(pos);
+                kdtToeicDB.deleteNote(note.getId());
+                notes.clear();
+                notes.addAll(kdtToeicDB.getNote());
                 noteAdapter.notifyDataSetChanged();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });

@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.kdttoeic.Data.KDTToeicDB;
 import com.example.kdttoeic.R;
 import com.example.kdttoeic.SearchActivity;
 import com.example.kdttoeic.adapter.WordAdapter;
@@ -39,6 +40,7 @@ public class SearchFragment extends Fragment implements WordAdapter.Listener {
     ArrayList<Word> arrayList;
     WordAdapter wordAdapter;
     SearchView searchView;
+    KDTToeicDB kdtToeicDB;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -97,18 +99,18 @@ public class SearchFragment extends Fragment implements WordAdapter.Listener {
 
         rvSearch = view.findViewById(R.id.rvWords);
         arrayList = new ArrayList<>();
-
-        Word word = new Word(1, "bridge", "cây cầu");
-        arrayList.add(word);
-        word = new Word(1, "Cow", "con bò");
-        arrayList.add(word);
-        word = new Word(1, "Sheep", "cừu");
-        arrayList.add(word);
-        word = new Word(4, "chick", "cừu");
-        arrayList.add(word);
-        word = new Word(4, "table", "cừu");
-        arrayList.add(word);
-
+        kdtToeicDB = new KDTToeicDB(getContext());
+//        Word word = new Word(1, "bridge", "cây cầu");
+//        arrayList.add(word);
+//        word = new Word(1, "Cow", "con bò");
+//        arrayList.add(word);
+//        word = new Word(1, "Sheep", "cừu");
+//        arrayList.add(word);
+//        word = new Word(4, "chick", "cừu");
+//        arrayList.add(word);
+//        word = new Word(4, "table", "cừu");
+//        arrayList.add(word);
+        arrayList = kdtToeicDB.getVocab();
 
         wordAdapter = new WordAdapter(arrayList, this);
         rvSearch.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));

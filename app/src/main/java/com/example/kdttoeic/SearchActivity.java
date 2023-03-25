@@ -38,16 +38,16 @@ public class SearchActivity extends AppCompatActivity implements WordAdapter.Lis
         rvSearch = findViewById(R.id.rvSearch);
         arrayList = new ArrayList<>();
 
-        Word word = new Word(1, "Dick", "cu");
-        arrayList.add(word);
-        word = new Word(1, "Cow", "con bò");
-        arrayList.add(word);
-        word = new Word(1, "Sheep", "cừu");
-        arrayList.add(word);
-        word = new Word(4, "chick", "cừu");
-        arrayList.add(word);
-        word = new Word(4, "table", "cừu");
-        arrayList.add(word);
+//        Word word = new Word(1, "Dick", "cu");
+//        arrayList.add(word);
+//        word = new Word(1, "Cow", "con bò");
+//        arrayList.add(word);
+//        word = new Word(1, "Sheep", "cừu");
+//        arrayList.add(word);
+//        word = new Word(4, "chick", "cừu");
+//        arrayList.add(word);
+//        word = new Word(4, "table", "cừu");
+//        arrayList.add(word);
 
 
         wordAdapter = new WordAdapter(arrayList, this);
