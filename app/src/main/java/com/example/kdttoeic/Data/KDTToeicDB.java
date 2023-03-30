@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.kdttoeic.model.History;
+import com.example.kdttoeic.model.HistoryDetails;
 import com.example.kdttoeic.model.Note;
 import com.example.kdttoeic.model.Question;
 import com.example.kdttoeic.model.Word;
@@ -94,6 +96,7 @@ public class KDTToeicDB {
             int love = cursor.getInt(10);
             int questionCat = cursor.getInt(11);
             Question question = new Question(id, content, image, audio, opA, opB, opC, opD, asnwer, level, love, questionCat);
+            tmp.add(question);
         }
         return tmp;
     }
@@ -139,6 +142,85 @@ public class KDTToeicDB {
     public void deleteNote(int id) {
         db = openDB();
         db.delete("tblNote", "ID=" + id, null);
+        db.close();
+    }
+
+    //Lấy lịch sử làm bài
+    public ArrayList<History> getHistory(){
+        ArrayList<History> lstTemp = new ArrayList<>();
+        String sql = "SELECT * FROM tblHistory";
+        db = openDB();
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String topic = cursor.getString(1);
+            int amountQuestion = cursor.getInt(2);
+            int maxAmountQuestion = cursor.getInt(3);
+            float score = cursor.getFloat(4);
+            History history = new History(id,topic,amountQuestion, maxAmountQuestion, score);
+            lstTemp.add(history);
+        }
+        db.close();
+        return lstTemp;
+    }
+
+    //Thêm lịch sử làm bài
+    public void insertHistory(String topic, int amountQuestion, int maxAmountQuestion, float score){
+        db = openDB();
+        ContentValues cv = new ContentValues();
+        cv.put("TOPIC", topic);
+        cv.put("AMOUNT_QUESTION", amountQuestion);
+        cv.put("MAX_AMOUNT_QUESTION", maxAmountQuestion);
+        cv.put("SCORE", score);
+
+        db.insert("tblHistory", null, cv);
+        db.close();
+    }
+    //Lấy số lượng lịch sử bài làm
+    public int countHistory(){
+        String sql = "SELECT * FROM tblHistory";
+        db = openDB();
+        Cursor cursor = db.rawQuery(sql, null);
+        return cursor.getCount();
+    }
+
+    //Load danh sách đáp án theo lịch sử kiểm tra
+    public ArrayList<HistoryDetails> getAnswerList(int idHistory){
+        ArrayList<HistoryDetails> lstAnswer = new ArrayList<>();
+//        String sql = "SELECT * FROM tblHistoryDetails WHELE ID_HISTORY = " + String.valueOf(idHistory)  ;
+//        String sql = "SELECT * FROM tblHistoryDetails" ;
+        String sql = "SELECT * FROM tblHistoryDetails where ID_HISTORY ="+idHistory;
+
+        db = openDB();
+        Cursor cursor = db.rawQuery(sql,null);
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            int id_History = cursor.getInt(1);
+            int selectOptionUser = cursor.getInt(2);
+            int correctAnswer = cursor.getInt(3);
+            HistoryDetails historyDetails = new HistoryDetails(id,id_History,selectOptionUser, correctAnswer);
+            lstAnswer.add(historyDetails);
+        }
+        db.close();
+        return lstAnswer;
+    }
+
+    //Thêm chi tiết đáp án
+    public void insertHistoryDetails(int idHistory, int selectOptionUser, int correctAnswer){
+        db = openDB();
+        ContentValues cv = new ContentValues();
+        cv.put("ID_HISTORY", idHistory);
+        cv.put("SELECTED_OPTION_USER", selectOptionUser);
+        cv.put("CORRECT_ANSWER", correctAnswer);
+        db.insert("tblHistoryDetails", null, cv);
+        db.close();
+    }
+
+    //Xóa chi tiết đáp án
+
+    public void deleteHistoryDetails(int id) {
+        db = openDB();
+        db.delete("tblHistoryDetails", "ID_History=" + id, null);
         db.close();
     }
 }

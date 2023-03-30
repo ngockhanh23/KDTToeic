@@ -1,10 +1,14 @@
 package com.example.kdttoeic;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +17,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kdttoeic.Data.KDTToeicDB;
+import com.example.kdttoeic.model.History;
 import com.example.kdttoeic.model.Question;
 
 import java.util.ArrayList;
@@ -20,10 +26,12 @@ import java.util.Collections;
 
 public class PracticeActivity extends AppCompatActivity {
 
-    TextView tvQuestionPractice;
+    KDTToeicDB kdtToeicDB;
+    TextView tvQuestionPractice, tvAmountQuestionTest, tvMaxAmountQuestionTest;
     RadioGroup rgOptionsQuestion;
     RadioButton rbOpA, rbOpB, rbOpC, rbOpD;
     Button btNextQuestion;
+
 
     ArrayList<Question> lstQuestion;
     private int maxAmountQuestion;
@@ -35,10 +43,14 @@ public class PracticeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice);
+
+        kdtToeicDB = new KDTToeicDB(PracticeActivity.this);
         AnhXa();
         AddQuestion();
 
-        Collections.shuffle(lstQuestion);
+//        Collections.shuffle(lstQuestion);
+
+
 
         tvQuestionPractice.setText(lstQuestion.get(0).getContent());
         rbOpA.setText(lstQuestion.get(0).getOpA());
@@ -73,6 +85,7 @@ public class PracticeActivity extends AppCompatActivity {
         //lấy số lượng câu hỏi
         Bundle bundle = getIntent().getExtras();
         maxAmountQuestion = Integer.parseInt(bundle.getString("maxAmountQuestion"));
+        tvMaxAmountQuestionTest.setText(String.valueOf(this.maxAmountQuestion));
 
 
         //xử lý sự kiện khi click sang câu hỏi tiếp theo
@@ -86,9 +99,19 @@ public class PracticeActivity extends AppCompatActivity {
 
                 if(count == maxAmountQuestion)
                 {
+                    int countHistory = kdtToeicDB.countHistory();
+                    kdtToeicDB.insertHistoryDetails(countHistory+1,optionUser,correctAnswer);
+
                     Intent intent = new Intent(PracticeActivity.this, ResultTestActivity.class);
                     intent.putExtra("countCorrectAnswer", countCorrectAnswer);
                     intent.putExtra("maxAmountQuestion", maxAmountQuestion);
+                    intent.putExtra("ID_HISTORY",countHistory);
+                    float score =  (float) countCorrectAnswer / (float) maxAmountQuestion * 100;
+
+                    //Thêm lịch sử
+                    kdtToeicDB.insertHistory("Luyện tập",countCorrectAnswer,maxAmountQuestion, score);
+
+
                     startActivity(intent);
                     finish();
                 }
@@ -96,39 +119,37 @@ public class PracticeActivity extends AppCompatActivity {
 //                Toast.makeText(PracticeActivity.this,optionUser,Toast.LENGTH_LONG).show();
 
                else{
-                    Intent i = getIntent();
-
-                    i.putExtra("question", lstQuestion.get(count).getContent());
-                    i.putExtra("opA", lstQuestion.get(count).getOpA());
-                    i.putExtra("opB", lstQuestion.get(count).getOpB());
-                    i.putExtra("opC", lstQuestion.get(count).getOpC());
-                    i.putExtra("opD", lstQuestion.get(count).getOpD());
-                    i.putExtra("answer", lstQuestion.get(count).getAnswer());
+//                  thêm lịch sử đáp án
+                    int countHistory = kdtToeicDB.countHistory();
+                    kdtToeicDB.insertHistoryDetails(countHistory+1,optionUser,correctAnswer);
 
 
-                    Bundle nextQuestion = getIntent().getExtras();
                     rgOptionsQuestion.clearCheck();
-                    tvQuestionPractice.setText(nextQuestion.getString("question"));
-                    rbOpA.setText(nextQuestion.getString("opA"));
-                    rbOpB.setText(nextQuestion.getString("opB"));
-                    rbOpC.setText(nextQuestion.getString("opC"));
-                    rbOpD.setText(nextQuestion.getString("opD"));
-                    correctAnswer = nextQuestion.getInt("answer");
+                    tvQuestionPractice.setText(lstQuestion.get(count).getContent());
+                    rbOpA.setText(lstQuestion.get(count).getOpA());
+                    rbOpB.setText(lstQuestion.get(count).getOpB());
+                    rbOpC.setText(lstQuestion.get(count).getOpC());
+                    rbOpD.setText(lstQuestion.get(count).getOpD());
+                    correctAnswer = lstQuestion.get(count).getAnswer();
                     count++;
-                }
+                    tvAmountQuestionTest.setText(String.valueOf(count));
+
+               }
 
 
             }
         });
 
 
-        tvQuestionPractice.setText(lstQuestion.get(0).getContent().toString());
+//        tvQuestionPractice.setText(lstQuestion.get(0).getContent().toString());
 
         getSupportActionBar().setTitle("Luyện tập");
 
     }
 
     void AnhXa(){
+        tvAmountQuestionTest = findViewById(R.id.tvAmountQuestionTest);
+        tvMaxAmountQuestionTest = findViewById(R.id.tvMaxAmountQuestionTest);
         tvQuestionPractice = findViewById(R.id.tvQuestionPractice);
         rgOptionsQuestion = findViewById(R.id.rgOptionsQuestion);
         rbOpA = findViewById(R.id.rbOpA);
@@ -138,13 +159,54 @@ public class PracticeActivity extends AppCompatActivity {
         btNextQuestion = findViewById(R.id.btNextQuestion);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater mnInflater = getMenuInflater();
+        mnInflater.inflate(R.menu.exit, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.mnExit){
+            ExitButtonOption();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    void ExitButtonOption(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(PracticeActivity.this);
+        builder.setTitle("Oh no !!!");
+        builder.setMessage("Nếu bạn thoát, tiến độ làm bài của bạn sẽ không được lưu lại, bạn có chắc chắn muốn thoát hay không ?");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int countHistory = kdtToeicDB.countHistory();
+                kdtToeicDB.deleteHistoryDetails(countHistory+1);
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.show();
+        alertDialog.show();
+    }
+
     void AddQuestion(){
-        lstQuestion = new ArrayList<>();
-        lstQuestion.add(new Question(1,"Who are all ________ people?", "","","this","those","them","that",2,1,0,1));
-        lstQuestion.add(new Question(2,"I ____ a car next year", "","","buy","am buying","going to buy","bought",2,2,0,1));
-        lstQuestion.add(new Question(3,"When do you go _____ bed?","","" ,"to","to the","in","in the",1,2,0,1));
-        lstQuestion.add(new Question(4,"London is famous for _____ red buses","","", "it's","its","it","is it",2,1,0,1));
-        lstQuestion.add(new Question(5,"Is there _____ milk in the fridge?","","", "a lot ","many","much","some",4,2,1,3));
+//        lstQuestion = new ArrayList<>();
+//        lstQuestion.add(new Question(1,"Who are all ________ people?", "","","this","those","them","that",2,1,0,1));
+//        lstQuestion.add(new Question(2,"I ____ a car next year", "","","buy","am buying","going to buy","bought",2,2,0,1));
+//        lstQuestion.add(new Question(3,"When do you go _____ bed?","","" ,"to","to the","in","in the",1,2,0,1));
+//        lstQuestion.add(new Question(4,"London is famous for _____ red buses","","", "it's","its","it","is it",2,1,0,1));
+//        lstQuestion.add(new Question(5,"Is there _____ milk in the fridge?","","", "a lot ","many","much","some",4,2,1,3));
+
+        lstQuestion = kdtToeicDB.getQuestion();
 
     }
 }

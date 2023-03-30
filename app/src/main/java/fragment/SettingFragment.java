@@ -15,13 +15,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.TextView;
 
+import com.example.kdttoeic.HistoryActivity;
 import com.example.kdttoeic.LoginActivity;
 import com.example.kdttoeic.R;
 import com.example.kdttoeic.RegisterActivity;
+import com.example.kdttoeic.model.History;
 
 public class SettingFragment extends Fragment {
-    Button btLogin, btRegis, btInterface, btAnswer,btDownload, btRemind;
+    Button btLogin, btRegis, btInterface, btAnswer, btRemind, btHistory;
+//    TextView btHistory;
     boolean nightMode;
     Switch switchInterFace;
     SharedPreferences sharedPreferences;
@@ -39,6 +43,15 @@ public class SettingFragment extends Fragment {
         anhxa(view);
         btLogin.setOnClickListener(onclickOption());
         btRegis.setOnClickListener(onclickOption());
+
+        btHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               OpenHistory();
+
+            }
+        });
         return view;
     }
 
@@ -63,6 +76,7 @@ public class SettingFragment extends Fragment {
                     case R.id.btRegis:
                         OpenRegis();
                         break;
+
                 }
             }
         };
@@ -73,7 +87,12 @@ public class SettingFragment extends Fragment {
         startActivity(intent);
     }
     private void OpenLogin() {
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        Intent intent = new Intent(getActivity(), HistoryActivity.class);
+        startActivity(intent);
+    }
+
+     void OpenHistory(){
+        Intent intent = new Intent(getActivity(), HistoryActivity.class);
         startActivity(intent);
     }
     void anhxa(View view) {
@@ -81,7 +100,7 @@ public class SettingFragment extends Fragment {
         btRegis = view.findViewById(R.id.btRegis);
         btInterface = view.findViewById(R.id.btInterface);
         btAnswer = view.findViewById(R.id.btAnswer);
-        btDownload = view.findViewById(R.id.btDownload);
+        btHistory = view.findViewById(R.id.btHistory);
         btRemind = view.findViewById(R.id.btRemind);
         switchInterFace = view.findViewById(R.id.switchInterFace);
     }

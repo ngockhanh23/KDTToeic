@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/ivTickOrCross"
+            android:layout_width="25dp"
+            android:layout_marginTop="6dp"
+            android:layout_height="25dp"
+            android:src="@drawable/incorrect"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Câu "
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/tvIndexAnswer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="1"
+            android:textSize="20sp"/>
+        <ImageView
+            android:id="@+id/ivAnswerA"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/a_answer"/>
+        <ImageView
+            android:id="@+id/ivAnswerB"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/b_answer"/>
+        <ImageView
+            android:id="@+id/ivAnswerC"
+            android:layout_width="0dp"
+            android:layout_height="40sp"
+            android:layout_weight="1"
+            android:src="@drawable/c_answer"/>
+        <ImageView
+            android:id="@+id/ivAnswerD"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/d_answer"/>
+    </LinearLayout>
+
+
+</LinearLayout>
