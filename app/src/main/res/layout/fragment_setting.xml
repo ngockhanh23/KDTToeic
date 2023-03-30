@@ -86,18 +86,20 @@
 
 
         <Button
-            android:id="@+id/btDownload"
+            android:id="@+id/btHistory"
             android:paddingLeft="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quản lí tải xuống"
+            android:text="Lịch sử bài làm"
             android:textAlignment="textStart"
             android:textColor="#000000"
             android:cursorVisible="true"
-            android:drawableLeft="@drawable/ic_baseline_download_for_offline_24"
+            android:drawableLeft="@drawable/baseline_history_24"
             android:drawablePadding="40dp"
             android:background="@drawable/line_bottom_setting"
             android:textAllCaps="false"/>
+
+
 
         <Button
             android:id="@+id/btAnswer"

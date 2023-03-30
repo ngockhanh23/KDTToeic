@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class ResultTestActivity extends AppCompatActivity {
 
     TextView tvCorrectAnswer, tvMaxAmountQuestion, tvCore, tvCommentResult;
-    Button btHomeBack;
+    Button btHomeBack, btViewAnswer;
     float score;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class ResultTestActivity extends AppCompatActivity {
 
         int countCorrectAnswer = bundle.getInt("countCorrectAnswer");
         int maxAmountQuestion = bundle.getInt("maxAmountQuestion");
+        int id_History = bundle.getInt("ID_HISTORY");
 
 
         score =  (float) countCorrectAnswer / (float) maxAmountQuestion * 100;
@@ -45,6 +46,15 @@ public class ResultTestActivity extends AppCompatActivity {
             }
         });
 
+        btViewAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ResultTestActivity.this, HistoryDetailsActivity.class);
+                intent.putExtra("ID_HISTORY", id_History+1);
+                startActivity(intent);
+            }
+        });
+
     }
 
     void AnhXa(){
@@ -53,5 +63,6 @@ public class ResultTestActivity extends AppCompatActivity {
         tvCommentResult = findViewById(R.id.tvCommentResult);
         tvCore = findViewById(R.id.tvCore);
         btHomeBack = findViewById(R.id.btHomeBack);
+        btViewAnswer = findViewById(R.id.btViewAnswer);
     }
 }

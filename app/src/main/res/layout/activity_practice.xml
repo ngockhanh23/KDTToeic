@@ -14,21 +14,61 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/imagequetion"/>
 
-        <TextView
-            android:id="@+id/tvQuestionPractice"
+
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/question_background"
             android:elevation="6dp"
-            android:padding="10dp"
-            android:text="The crime rate has continued to rise in American cities despite efforts on the part of both government and private citizens to curb ……………."
-            android:textColor="#fff"
-            android:textSize="20sp" />
+            android:padding="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Câu : "/>
+                <TextView
+                    android:id="@+id/tvAmountQuestionTest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="/"/>
+                <TextView
+                    android:id="@+id/tvMaxAmountQuestionTest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="10"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/imagequetion"/>
+
+            <TextView
+                android:id="@+id/tvQuestionPractice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The crime rate has continued to rise in American cities despite efforts on the part of both government and private citizens to curb ……………."
+                android:textColor="#fff"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
 
 
 
@@ -82,11 +122,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="170dp"
+            android:layout_marginTop="100dp"
             android:orientation="horizontal">
-
-
-
             <Button
                 android:id="@+id/btNextQuestion"
                 android:layout_width="wrap_content"
