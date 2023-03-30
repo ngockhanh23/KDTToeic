@@ -8,4 +8,11 @@
         android:icon="@drawable/ic_baseline_search_24"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         />
+
+    <item
+        android:id="@+id/mnSort"
+        app:showAsAction="always"
+        android:title="Search"
+        android:icon="@drawable/ic_baseline_sort_24"
+        />
 </menu>

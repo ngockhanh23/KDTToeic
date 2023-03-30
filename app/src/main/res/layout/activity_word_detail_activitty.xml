@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".WordDetailActivitty"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/imDescribe"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/reading_1_icon" />
+
+    <TextView
+        android:id="@+id/tvEn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="WORD"
+        android:textColor="#009688"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvSpell"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="/spelling/"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tvVe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="TỪ"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:textColor="#FF9800"/>
+
+
+    <TextView
+        android:id="@+id/tvEx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="I am the hero"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#000"/>
+</LinearLayout>

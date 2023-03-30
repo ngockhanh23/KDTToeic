@@ -22,7 +22,7 @@ import com.example.kdttoeic.VocabCatActivity;
 
 public class HomeFragment extends Fragment {
 
-    LinearLayout btImageDes, btAskAndAnswer, btConversation, btFillSentence,btFillParagraph, btReadAndUndersand, btTakeNote, btTest;
+    LinearLayout btImageDes, btAskAndAnswer, btConversation, btFillSentence,btFillParagraph, btReadAndUndersand, btTakeNote, btTest,btVocabulary;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
         btReadAndUndersand = view.findViewById(R.id.btReadAndUndersand);
         btTakeNote = view.findViewById(R.id.btTakeNote);
         btTest = view.findViewById(R.id.btTest);
-
+        btVocabulary = view.findViewById(R.id.btVocabulary);
 
 
         btImageDes.setOnClickListener(onclickOption());
@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment {
         btFillParagraph.setOnClickListener(onclickOption());
         btReadAndUndersand.setOnClickListener(onclickOption());
         btTakeNote.setOnClickListener(onclickOption());
+        btVocabulary.setOnClickListener(onclickOption());
         btTest.setOnClickListener(onclickOption());
         return view;
     }
@@ -84,7 +85,7 @@ public class HomeFragment extends Fragment {
                         break;
                     case R.id.btTest:
                         openTestFragment();
-                    case R.id.tbVocabulary:
+                    case R.id.btVocabulary:
                         Intent i1 = new Intent(getActivity(), VocabCatActivity.class);
                         startActivity(i1);
                         break;

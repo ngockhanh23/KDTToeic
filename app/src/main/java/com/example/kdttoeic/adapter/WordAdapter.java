@@ -46,7 +46,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordVH> implem
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                listener.OnWordClick(word);
             }
         });
     }
@@ -103,6 +103,6 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordVH> implem
     }
 
     public interface Listener {
-
+        void OnWordClick(Word word);
     }
 }

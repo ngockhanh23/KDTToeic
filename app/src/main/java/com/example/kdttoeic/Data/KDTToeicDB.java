@@ -74,6 +74,27 @@ public class KDTToeicDB {
         return tmp;
     }
 
+    //Lấy tự vựng theo chủ đề
+    public ArrayList<Word> getVocabCat(int i) {
+        ArrayList<Word> tmp = new ArrayList<>();
+        String sql = "SELECT * FROM tblVocabulary WHERE vocabCat=" + i;
+        db = openDB();
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String en = cursor.getString(1);
+            String ve = cursor.getString(2);
+            String spell = cursor.getString(3);
+            int love = cursor.getInt(4);
+            String example = cursor.getString(5);
+            String image = cursor.getString(6);
+            int vocabCat = cursor.getInt(7);
+            Word word = new Word(id, en, ve, spell, love, example, image, vocabCat);
+            tmp.add(word);
+        }
+        return tmp;
+    }
+
     //lấy câu hỏi
     public ArrayList<Question> getQuestion() {
         ArrayList<Question> tmp = new ArrayList<>();

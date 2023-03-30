@@ -12,6 +12,10 @@ public class Word implements Serializable {
     String image;
     int vocabCat;
 
+    public Word() {
+
+    }
+
     public Word(int id, String en, String ve, String spell, int love, String example, String image, int vocabCat) {
         this.id = id;
         En = en;

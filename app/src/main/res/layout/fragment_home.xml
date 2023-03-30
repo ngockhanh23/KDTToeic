@@ -271,7 +271,7 @@
                 <!-- end_item_1-->
                 <!--item_2-->
                 <LinearLayout
-                    android:id="@+id/tbVocabulary"
+                    android:id="@+id/btVocabulary"
                     android:layout_width="110dp"
                     android:layout_height="110dp"
                     android:gravity="center"
