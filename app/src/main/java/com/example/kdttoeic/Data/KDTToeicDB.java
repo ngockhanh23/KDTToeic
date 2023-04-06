@@ -76,27 +76,6 @@ public class KDTToeicDB {
         return tmp;
     }
 
-    //Lấy tự vựng theo chủ đề
-    public ArrayList<Word> getVocabCat(int i) {
-        ArrayList<Word> tmp = new ArrayList<>();
-        String sql = "SELECT * FROM tblVocabulary WHERE vocabCat=" + i;
-        db = openDB();
-        Cursor cursor = db.rawQuery(sql, null);
-        while (cursor.moveToNext()) {
-            int id = cursor.getInt(0);
-            String en = cursor.getString(1);
-            String ve = cursor.getString(2);
-            String spell = cursor.getString(3);
-            int love = cursor.getInt(4);
-            String example = cursor.getString(5);
-            String image = cursor.getString(6);
-            int vocabCat = cursor.getInt(7);
-            Word word = new Word(id, en, ve, spell, love, example, image, vocabCat);
-            tmp.add(word);
-        }
-        return tmp;
-    }
-
     //lấy câu hỏi
     public ArrayList<Question> getQuestion() {
         ArrayList<Question> tmp = new ArrayList<>();
@@ -197,6 +176,33 @@ public class KDTToeicDB {
         db.insert("tblHistory", null, cv);
         db.close();
     }
+
+
+    //Cập nhật lịch sử
+    public void updateHistory(int id, int amountQuestion,int maxAmountQuestion, float score) {
+        db = openDB();
+        ContentValues cv = new ContentValues();
+        cv.put("AMOUNT_QUESTION", amountQuestion);
+        cv.put("MAX_AMOUNT_QUESTION", maxAmountQuestion);
+        cv.put("SCORE", score);
+        db.update("tblHistory", cv, "ID=" + id, null);
+        db.close();
+    }
+
+    //xóa lịch sử
+    public void deleteHistory(int id) {
+        db = openDB();
+        db.delete("tblHistory", "ID=" + id, null);
+        db.close();
+    }
+
+    //xóa toàn bộ lịch sử
+    public void clearHistory() {
+        db = openDB();
+        db.delete("tblHistory", "", null);
+        db.close();
+    }
+
     //Lấy số lượng lịch sử bài làm
     public int countHistory(){
         String sql = "SELECT * FROM tblHistory";
@@ -242,6 +248,13 @@ public class KDTToeicDB {
     public void deleteHistoryDetails(int id) {
         db = openDB();
         db.delete("tblHistoryDetails", "ID_History=" + id, null);
+        db.close();
+    }
+
+    //Xóa toàn bộ chi tiết đáp án
+    public void clearHistoryDetails() {
+        db = openDB();
+        db.delete("tblHistoryDetails", "", null);
         db.close();
     }
 }

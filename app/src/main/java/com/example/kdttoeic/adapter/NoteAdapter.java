@@ -39,7 +39,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteVH> {
             String title = note.getTitle().substring(0, 10);
             holder.tvTitle.setText(title + "...");
         } else {
-            holder.tvTitle.setText(note.getId());
+            holder.tvTitle.setText(note.getTitle());
         }
 
         if (note.getContent().length() > 30) {

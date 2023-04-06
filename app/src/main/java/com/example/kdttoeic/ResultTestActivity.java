@@ -9,10 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kdttoeic.Data.KDTToeicDB;
+import com.example.kdttoeic.model.History;
+
 public class ResultTestActivity extends AppCompatActivity {
 
     TextView tvCorrectAnswer, tvMaxAmountQuestion, tvCore, tvCommentResult;
     Button btHomeBack, btViewAnswer;
+    KDTToeicDB kdtToeicDB;
     float score;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +24,13 @@ public class ResultTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result_test);
         AnhXa();
         Bundle bundle = getIntent().getExtras();
+        kdtToeicDB = new KDTToeicDB(ResultTestActivity.this);
 
         int countCorrectAnswer = bundle.getInt("countCorrectAnswer");
         int maxAmountQuestion = bundle.getInt("maxAmountQuestion");
         int id_History = bundle.getInt("ID_HISTORY");
+
+        History lastHistory = kdtToeicDB.getHistory().get(kdtToeicDB.countHistory() - 1);
 
 
         score =  (float) countCorrectAnswer / (float) maxAmountQuestion * 100;
@@ -50,7 +57,7 @@ public class ResultTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ResultTestActivity.this, HistoryDetailsActivity.class);
-                intent.putExtra("ID_HISTORY", id_History+1);
+                intent.putExtra("ID_HISTORY", lastHistory.getId());
                 startActivity(intent);
             }
         });

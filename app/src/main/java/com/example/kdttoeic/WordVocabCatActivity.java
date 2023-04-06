@@ -28,7 +28,7 @@ public class WordVocabCatActivity extends AppCompatActivity implements WordAdapt
         Bundle bundle = getIntent().getExtras();
         int id = bundle.getInt("id");
         kdtToeicDB = new KDTToeicDB(this);
-        words = kdtToeicDB.getVocabCat(id);
+        words = kdtToeicDB.getVocab();
         rvWordVocabCats = findViewById(R.id.rvWordVocabCats);
 
         wordAdapter = new WordAdapter(words,this);

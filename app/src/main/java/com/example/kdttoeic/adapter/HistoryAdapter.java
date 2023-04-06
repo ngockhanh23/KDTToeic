@@ -36,7 +36,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
         History item = lstHistory.get(position);
 
-        if (item.getTopic().equals("Thi thử")){
+        if (item.getTopic().equals("Thi thử".trim())){
             holder.ivImageHistoryTopic.setImageResource(R.drawable.test_icon_history);
         }
 
@@ -68,10 +68,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
             tvTopicHistory = itemView.findViewById(R.id.tvTopicHistory);
             tvAmountQuestionHistory = itemView.findViewById(R.id.tvAmountQuestionHistory);
-            tvMaxAmountQuestionHistory = itemView.findViewById(R.id.tvAmountQuestionHistory);
+            tvMaxAmountQuestionHistory = itemView.findViewById(R.id.tvMaxAmountQuestionHistory);
             tvScoreHistory = itemView.findViewById(R.id.tvScoreHistory);
             ivImageHistoryTopic = itemView.findViewById(R.id.ivImageHistoryTopic);
-
         }
 
     }
