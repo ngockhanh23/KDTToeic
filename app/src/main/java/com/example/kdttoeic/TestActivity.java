@@ -83,7 +83,7 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
-        Bundle bundle = getIntent().getExtras();
+//        Bundle bundle = getIntent().getExtras();
         maxAmountQuestion = 5;
 
 
@@ -97,7 +97,7 @@ public class TestActivity extends AppCompatActivity {
 
                 if(count == maxAmountQuestion)
                 {
-                    kdtToeicDB.insertHistoryDetails(lastHistory.getId(), optionUser, correctAnswer, lstQuestion.get(count).getId());
+                    kdtToeicDB.insertHistoryDetails(lastHistory.getId(), optionUser, correctAnswer, lstQuestion.get(count-1).getId());
 
                     Intent intent = new Intent(TestActivity.this, ResultTestActivity.class);
                     intent.putExtra("countCorrectAnswer", countCorrectAnswer);
@@ -119,7 +119,7 @@ public class TestActivity extends AppCompatActivity {
                         kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(0).getId());
                     }
                     else {
-                        kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(count).getId());
+                        kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(count-1).getId());
                     }
 
                     tesOptionsQuestion.clearCheck();
