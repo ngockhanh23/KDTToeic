@@ -18,19 +18,22 @@ public class ResultTestActivity extends AppCompatActivity {
     Button btHomeBack, btViewAnswer;
     KDTToeicDB kdtToeicDB;
     float score;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_test);
+        kdtToeicDB = new KDTToeicDB(ResultTestActivity.this);
         AnhXa();
         Bundle bundle = getIntent().getExtras();
         kdtToeicDB = new KDTToeicDB(ResultTestActivity.this);
 
         int countCorrectAnswer = bundle.getInt("countCorrectAnswer");
         int maxAmountQuestion = bundle.getInt("maxAmountQuestion");
-        int id_History = bundle.getInt("ID_HISTORY");
 
-        History lastHistory = kdtToeicDB.getHistory().get(kdtToeicDB.countHistory() - 1);
+        History lastHistory = kdtToeicDB.getHistory().get(kdtToeicDB.countHistory()-1);
+
 
 
         score =  (float) countCorrectAnswer / (float) maxAmountQuestion * 100;
@@ -40,7 +43,7 @@ public class ResultTestActivity extends AppCompatActivity {
         tvCore.setText(String.valueOf(Math.floor(score)));
 
         if(score < 50 ){
-            tvCommentResult.setText("Như con cặc, cần học thêm nhiều");
+            tvCommentResult.setText("Dở, cần học thêm nhiều");
         }
         else {
             tvCommentResult.setText("Chúc mừng bạn đã hoàn thành bài làm");

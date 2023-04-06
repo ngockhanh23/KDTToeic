@@ -45,11 +45,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         holder.tvTopicHistory.setText(item.getTopic());
         holder.tvAmountQuestionHistory.setText(String.valueOf(item.getAmountQuestion()));
         holder.tvMaxAmountQuestionHistory.setText(String.valueOf(item.getMaxAmountQuestion()));
-        holder.tvScoreHistory.setText(String.valueOf(item.getScore()));
+        holder.tvScoreHistory.setText(String.valueOf(Math.floor(item.getScore())));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(lstHistory.get(position));
+                listener.onItemClick(item.getId());
             }
         });
     }
@@ -75,7 +75,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
     }
     public interface Listener{
-        void onItemClick(History history);
+        void onItemClick(int idHistory);
     }
 
 

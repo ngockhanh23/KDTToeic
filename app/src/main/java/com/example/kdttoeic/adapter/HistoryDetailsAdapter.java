@@ -17,11 +17,13 @@ import java.util.ArrayList;
 public class HistoryDetailsAdapter extends RecyclerView.Adapter<HistoryDetailsAdapter.HistoryDetailsVH> {
 
 
-    public HistoryDetailsAdapter(ArrayList<HistoryDetails> lstAnswer) {
+    public HistoryDetailsAdapter(ArrayList<HistoryDetails> lstAnswer, Listener listener) {
         this.lstAnswer = lstAnswer;
+        this.listener = listener;
     }
 
     ArrayList<HistoryDetails> lstAnswer;
+    Listener listener;
     @NonNull
     @Override
     public HistoryDetailsVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,7 +36,7 @@ public class HistoryDetailsAdapter extends RecyclerView.Adapter<HistoryDetailsAd
         HistoryDetails item = lstAnswer.get(position);
         holder.tvIndexAnswer.setText(String.valueOf(position + 1));
 
-        if(item.getSelectedOptionUser() == item.getcorrectAnswer() ){
+        if(item.getSelectedOptionUser() == item.getCorrectAnswer() ){
             holder.ivTickOrCross.setImageResource(R.drawable.correct);
         }
 
@@ -45,13 +47,19 @@ public class HistoryDetailsAdapter extends RecyclerView.Adapter<HistoryDetailsAd
             case 4: holder.ivAnswerD.setImageResource(R.drawable.d_wrong_answer); break;
         }
 
-        switch (item.getcorrectAnswer()){
+        switch (item.getCorrectAnswer()){
             case 1: holder.ivAnswerA.setImageResource(R.drawable.a_correct_answer); break;
             case 2: holder.ivAnswerB.setImageResource(R.drawable.b_correct_answer); break;
             case 3: holder.ivAnswerC.setImageResource(R.drawable.c_correct_answer); break;
             case 4: holder.ivAnswerD.setImageResource(R.drawable.d_correct_answer); break;
         }
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(item);
+            }
+        });
 
 
     }
@@ -76,5 +84,9 @@ public class HistoryDetailsAdapter extends RecyclerView.Adapter<HistoryDetailsAd
             ivAnswerC = itemView.findViewById(R.id.ivAnswerC);
             ivAnswerD = itemView.findViewById(R.id.ivAnswerD);
         }
+    }
+
+    public interface Listener{
+        void onItemClick(HistoryDetails historyDetails);
     }
 }

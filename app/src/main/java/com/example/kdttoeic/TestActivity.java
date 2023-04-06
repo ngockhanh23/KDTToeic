@@ -97,7 +97,7 @@ public class TestActivity extends AppCompatActivity {
 
                 if(count == maxAmountQuestion)
                 {
-                    kdtToeicDB.insertHistoryDetails(lastHistory.getId(), optionUser, correctAnswer);
+                    kdtToeicDB.insertHistoryDetails(lastHistory.getId(), optionUser, correctAnswer, lstQuestion.get(count).getId());
 
                     Intent intent = new Intent(TestActivity.this, ResultTestActivity.class);
                     intent.putExtra("countCorrectAnswer", countCorrectAnswer);
@@ -106,17 +106,21 @@ public class TestActivity extends AppCompatActivity {
                     float score = (float) countCorrectAnswer / (float) maxAmountQuestion * 100;
 
                     kdtToeicDB.updateHistory(lastHistory.getId(), countCorrectAnswer, maxAmountQuestion, score);
-
                     startActivity(intent);
-
-
                     finish();
                 }
 
 //                Toast.makeText(PracticeActivity.this,optionUser,Toast.LENGTH_LONG).show();
 
                 else{
-                    kdtToeicDB.insertHistoryDetails(lastHistory.getId(), optionUser, correctAnswer);
+
+                    //thêm lịch sử đáp án
+                    if(count ==1){
+                        kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(0).getId());
+                    }
+                    else {
+                        kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(count).getId());
+                    }
 
                     tesOptionsQuestion.clearCheck();
                     tvQuestionDes.setText(lstQuestion.get(count).getContent());

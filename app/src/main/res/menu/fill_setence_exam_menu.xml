@@ -5,11 +5,11 @@
         android:id="@+id/mnSetting"
         android:title="Setting"
         app:showAsAction="always"
-        android:icon="@drawable/baseline_settings_24"></item>
+        android:icon="@drawable/baseline_settings_24"/>
     <item
         android:id="@+id/mnLike"
         android:title="Love"
         app:showAsAction="always"
-        android:icon="@drawable/ic_baseline_favorite_24"
-        ></item>
+        android:icon="@drawable/ic_baseline_favorite_24"/>
+
 </menu>

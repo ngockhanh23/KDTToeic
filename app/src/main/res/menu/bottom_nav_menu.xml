@@ -18,5 +18,4 @@
         android:title="Cài đặt"
         android:icon="@drawable/baseline_settings_24"/>
 
-
 </menu>

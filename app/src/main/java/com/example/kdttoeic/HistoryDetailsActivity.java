@@ -1,21 +1,27 @@
 package com.example.kdttoeic;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.kdttoeic.Data.KDTToeicDB;
 import com.example.kdttoeic.adapter.HistoryDetailsAdapter;
+import com.example.kdttoeic.model.History;
 import com.example.kdttoeic.model.HistoryDetails;
+import com.example.kdttoeic.model.Question;
 
 import java.util.ArrayList;
 
-public class HistoryDetailsActivity extends AppCompatActivity {
+public class HistoryDetailsActivity extends AppCompatActivity implements HistoryDetailsAdapter.Listener {
 
     RecyclerView rvHistoryDetails;
     ArrayList<HistoryDetails> lstAnswer;
@@ -32,7 +38,7 @@ public class HistoryDetailsActivity extends AppCompatActivity {
 
         LoadData(bundle.getInt("ID_HISTORY"));
 
-        historyDetailsAdapter = new HistoryDetailsAdapter(lstAnswer);
+        historyDetailsAdapter = new HistoryDetailsAdapter(lstAnswer, HistoryDetailsActivity.this);
         rvHistoryDetails.setLayoutManager(new LinearLayoutManager(HistoryDetailsActivity.this,LinearLayoutManager.VERTICAL, false));
         rvHistoryDetails.setAdapter(historyDetailsAdapter);
         rvHistoryDetails.addItemDecoration(new DividerItemDecoration(HistoryDetailsActivity.this,DividerItemDecoration.VERTICAL));
@@ -51,5 +57,14 @@ public class HistoryDetailsActivity extends AppCompatActivity {
     public void LoadData(int id){
 
         lstAnswer = kdtToeicDB.getAnswerList(id);
+    }
+
+    @Override
+    public void onItemClick(HistoryDetails historyDetails) {
+        Intent intent = new Intent(HistoryDetailsActivity.this, DetailsAnswerActivity.class);
+        intent.putExtra("ID_Question", historyDetails.getIdQuestion());
+        intent.putExtra("selectOptionUser", historyDetails.getSelectedOptionUser());
+        intent.putExtra("correctAnswer", historyDetails.getCorrectAnswer());
+        startActivity(intent);
     }
 }

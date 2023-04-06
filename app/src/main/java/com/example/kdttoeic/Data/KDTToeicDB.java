@@ -101,6 +101,38 @@ public class KDTToeicDB {
         return tmp;
     }
 
+    public Question getQuestionItem(int idQuestion){
+
+
+        String sql = "SELECT * FROM tblQuestion";
+        db = openDB();
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String content = cursor.getString(1);
+            String image = cursor.getString(2);
+            String audio = cursor.getString(3);
+            String opA = cursor.getString(4);
+            String opB = cursor.getString(5);
+            String opC = cursor.getString(6);
+            String opD = cursor.getString(7);
+            int asnwer = cursor.getInt(8);
+            int level = cursor.getInt(9);
+            int love = cursor.getInt(10);
+            int questionCat = cursor.getInt(11);
+
+            if(id == idQuestion){
+                Question question = new Question(id, content, image, audio, opA, opB, opC, opD, asnwer, level, love, questionCat);
+                db.close();
+                return question;
+            }
+        }
+        db.close();
+
+
+        return null;
+    }
+
     //lấy ghi chú
     public ArrayList<Note> getNote() {
         ArrayList<Note> tmp = new ArrayList<>();
@@ -225,7 +257,8 @@ public class KDTToeicDB {
             int id_History = cursor.getInt(1);
             int selectOptionUser = cursor.getInt(2);
             int correctAnswer = cursor.getInt(3);
-            HistoryDetails historyDetails = new HistoryDetails(id,id_History,selectOptionUser, correctAnswer);
+            int idQuestion = cursor.getInt(4);
+            HistoryDetails historyDetails = new HistoryDetails(id,id_History,selectOptionUser, correctAnswer, idQuestion);
             lstAnswer.add(historyDetails);
         }
         db.close();
@@ -233,12 +266,13 @@ public class KDTToeicDB {
     }
 
     //Thêm chi tiết đáp án
-    public void insertHistoryDetails(int idHistory, int selectOptionUser, int correctAnswer){
+    public void insertHistoryDetails(int idHistory, int selectOptionUser, int correctAnswer, int idQuestion){
         db = openDB();
         ContentValues cv = new ContentValues();
         cv.put("ID_HISTORY", idHistory);
         cv.put("SELECTED_OPTION_USER", selectOptionUser);
         cv.put("CORRECT_ANSWER", correctAnswer);
+        cv.put("ID_QUESTION", idQuestion);
         db.insert("tblHistoryDetails", null, cv);
         db.close();
     }
@@ -257,4 +291,8 @@ public class KDTToeicDB {
         db.delete("tblHistoryDetails", "", null);
         db.close();
     }
+
+
+
+
 }

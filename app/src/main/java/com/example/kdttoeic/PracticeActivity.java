@@ -60,6 +60,9 @@ public class PracticeActivity extends AppCompatActivity {
 
         correctAnswer = lstQuestion.get(0).getAnswer();
 
+        History lastHistory = kdtToeicDB.getHistory().get(kdtToeicDB.countHistory()-1);
+
+
 
         //Bắt sự kiện người dùng chọn đáp án
         rgOptionsQuestion.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -99,17 +102,17 @@ public class PracticeActivity extends AppCompatActivity {
 
                 if(count == maxAmountQuestion)
                 {
-                    int countHistory = kdtToeicDB.countHistory();
-                    kdtToeicDB.insertHistoryDetails(countHistory+1,optionUser,correctAnswer);
+
+                    kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(count-1).getId());
 
                     Intent intent = new Intent(PracticeActivity.this, ResultTestActivity.class);
                     intent.putExtra("countCorrectAnswer", countCorrectAnswer);
                     intent.putExtra("maxAmountQuestion", maxAmountQuestion);
-                    intent.putExtra("ID_HISTORY",countHistory);
+//                    intent.putExtra("ID_HISTORY",countHistory);
                     float score =  (float) countCorrectAnswer / (float) maxAmountQuestion * 100;
 
-                    //Thêm lịch sử
-                    kdtToeicDB.insertHistory("Luyện tập",countCorrectAnswer,maxAmountQuestion, score);
+                    //Cập nhật lịch sử
+                    kdtToeicDB.updateHistory(lastHistory.getId(),countCorrectAnswer,maxAmountQuestion,score);
 
 
                     startActivity(intent);
@@ -120,11 +123,16 @@ public class PracticeActivity extends AppCompatActivity {
 
                else{
 //                  thêm lịch sử đáp án
-                    int countHistory = kdtToeicDB.countHistory();
-                    kdtToeicDB.insertHistoryDetails(countHistory+1,optionUser,correctAnswer);
+                    if(count ==1){
+                        kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(0).getId());
+                    }
+                    else {
+                        kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(count-1).getId());
+                    }
 
 
                     rgOptionsQuestion.clearCheck();
+
                     tvQuestionPractice.setText(lstQuestion.get(count).getContent());
                     rbOpA.setText(lstQuestion.get(count).getOpA());
                     rbOpB.setText(lstQuestion.get(count).getOpB());
@@ -182,8 +190,9 @@ public class PracticeActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int countHistory = kdtToeicDB.countHistory();
-                kdtToeicDB.deleteHistoryDetails(countHistory+1);
+                History lastHistory = kdtToeicDB.getHistory().get(kdtToeicDB.countHistory()-1);
+                kdtToeicDB.deleteHistoryDetails(lastHistory.getId());
+                kdtToeicDB.deleteHistory(lastHistory.getId());
                 finish();
             }
         });
@@ -199,14 +208,15 @@ public class PracticeActivity extends AppCompatActivity {
     }
 
     void AddQuestion(){
-//        lstQuestion = new ArrayList<>();
-//        lstQuestion.add(new Question(1,"Who are all ________ people?", "","","this","those","them","that",2,1,0,1));
-//        lstQuestion.add(new Question(2,"I ____ a car next year", "","","buy","am buying","going to buy","bought",2,2,0,1));
-//        lstQuestion.add(new Question(3,"When do you go _____ bed?","","" ,"to","to the","in","in the",1,2,0,1));
-//        lstQuestion.add(new Question(4,"London is famous for _____ red buses","","", "it's","its","it","is it",2,1,0,1));
-//        lstQuestion.add(new Question(5,"Is there _____ milk in the fridge?","","", "a lot ","many","much","some",4,2,1,3));
+//
+//        lstQuestion = kdtToeicDB.getQuestion();
 
-        lstQuestion = kdtToeicDB.getQuestion();
+        lstQuestion = new ArrayList<>();
+        lstQuestion.add(new Question(1,"Who are all ________ people?", "","","this","those","them","that",2,1,0,1));
+        lstQuestion.add(new Question(2,"I ____ a car next year", "","","buy","am buying","going to buy","bought",2,2,0,1));
+        lstQuestion.add(new Question(3,"When do you go _____ bed?","","" ,"to","to the","in","in the",1,2,0,1));
+        lstQuestion.add(new Question(4,"London is famous for _____ red buses","","", "it's","its","it","is it",2,1,0,1));
+        lstQuestion.add(new Question(5,"Is there _____ milk in the fridge?","","", "a lot ","many","much","some",4,2,1,3));
 
     }
 }
