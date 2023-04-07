@@ -13,9 +13,6 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="ProgressBarStyle">
-        <item name="colorAccent">#4D8E88</item>
-    </style>
 
     <!--    Light mode-->
     <!--    Screen background id light mode on-->
@@ -24,7 +21,10 @@
     </style>
 
     <!--    Texts bacground if light mode on-->
-    <style name="TEXT">
+    <style name="TEXTVIEW">
         <item name="android:textColor">#009688</item>
+    </style>
+    <style name="BACKGROUND">
+        <item name="android:background">#FFFFFF</item>
     </style>
 </resources>

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.kdttoeic.Data.VocabCat;
+import com.example.kdttoeic.model.VocabCat;
 import com.example.kdttoeic.adapter.VocabCatAdapter;
 
 import java.util.ArrayList;

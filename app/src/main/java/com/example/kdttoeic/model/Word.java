@@ -2,7 +2,7 @@ package com.example.kdttoeic.model;
 
 import java.io.Serializable;
 
-public class Word implements Serializable {
+public class Word implements Serializable, Comparable<Word> {
     int id;
     String En;
     String Ve;
@@ -89,5 +89,10 @@ public class Word implements Serializable {
 
     public void setVe(String ve) {
         Ve = ve;
+    }
+
+    @Override
+    public int compareTo(Word o) {
+        return En.compareTo(o.getEn());
     }
 }

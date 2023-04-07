@@ -21,8 +21,11 @@
     </style>
 
 <!--    Texts bacground if light mode off-->
-    <style name="TEXT">
-        <item name="android:textColor">#27302F</item>
+    <style name="TEXTVIEW">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">#000000</item>
     </style>
-
+    <style name="BACKGROUND">
+        <item name="android:background">#EB1313</item>
+    </style>
 </resources>

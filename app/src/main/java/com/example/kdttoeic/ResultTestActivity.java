@@ -14,6 +14,7 @@ public class ResultTestActivity extends AppCompatActivity {
     TextView tvCorrectAnswer, tvMaxAmountQuestion, tvCore, tvCommentResult;
     Button btHomeBack, btViewAnswer;
     float score;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,16 +27,15 @@ public class ResultTestActivity extends AppCompatActivity {
         int id_History = bundle.getInt("ID_HISTORY");
 
 
-        score =  (float) countCorrectAnswer / (float) maxAmountQuestion * 100;
+        score = (float) countCorrectAnswer / (float) maxAmountQuestion * 100;
 
         tvCorrectAnswer.setText(String.valueOf(countCorrectAnswer));
         tvMaxAmountQuestion.setText(String.valueOf(maxAmountQuestion));
         tvCore.setText(String.valueOf(Math.floor(score)));
 
-        if(score < 50 ){
+        if (score < 50) {
             tvCommentResult.setText("Như con cặc, cần học thêm nhiều");
-        }
-        else {
+        } else {
             tvCommentResult.setText("Chúc mừng bạn đã hoàn thành bài làm");
         }
 
@@ -50,14 +50,14 @@ public class ResultTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ResultTestActivity.this, HistoryDetailsActivity.class);
-                intent.putExtra("ID_HISTORY", id_History+1);
+                intent.putExtra("ID_HISTORY", id_History + 1);
                 startActivity(intent);
             }
         });
 
     }
 
-    void AnhXa(){
+    void AnhXa() {
         tvCorrectAnswer = findViewById(R.id.tvCorrectAnswer);
         tvMaxAmountQuestion = findViewById(R.id.tvMaxAmountQuestion);
         tvCommentResult = findViewById(R.id.tvCommentResult);

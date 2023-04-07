@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PracticeActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/question_background"
+            android:elevation="6dp"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tvQuestionPractice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The crime rate has continued to rise in American cities despite efforts on the part of both government and private citizens to curb ……………."
+                android:textColor="#fff"
+
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+
+        <RadioGroup
+            android:id="@+id/rgOptionsQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="70dp"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rbOpA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="him"
+                android:textSize="15sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <RadioButton
+                android:id="@+id/rbOpB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:minHeight="20dp"
+                android:text="them"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rbOpC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:minHeight="48dp"
+                android:text="its"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rbOpD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:text="it"
+                android:textSize="15sp" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+            <Button
+                android:id="@+id/btDecrease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="#F44336"
+                android:text="Giảm"
+                android:textColor="#FFF" />
+
+            <Button
+                android:id="@+id/btIncrease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="#FF9800"
+                android:text="Tăng"
+                android:textColor="#FFF" />
+
+            <Button
+                android:id="@+id/btSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="#009688"
+                android:text="Save"
+                android:textColor="#FFF" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

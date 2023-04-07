@@ -1,4 +1,4 @@
-package com.example.kdttoeic.Data;
+package com.example.kdttoeic.model;
 
 public class VocabCat {
     int id;

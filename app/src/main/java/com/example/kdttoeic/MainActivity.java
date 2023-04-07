@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottommNav;
     ActionBar actionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

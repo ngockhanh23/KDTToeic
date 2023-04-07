@@ -29,6 +29,7 @@ import com.example.kdttoeic.model.Word;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -145,7 +146,7 @@ public class SearchFragment extends Fragment implements WordAdapter.Listener {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.mnSort) {
-            //Collections.sort(arrayList);
+            Collections.sort(arrayList);
             wordAdapter.notifyDataSetChanged();
 
         }
