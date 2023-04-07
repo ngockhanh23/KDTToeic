@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.kdttoeic.Data.KDTToeicDB;
+
 import java.util.ArrayList;
 
 
@@ -19,7 +21,7 @@ public class PracticeDesPageActivity extends AppCompatActivity {
     Button btStartPractice;
     Spinner spQuestionCount;
     private String AmountQuestion;
-
+    KDTToeicDB kdtToeicDB;
 
 
     @Override
@@ -36,6 +38,7 @@ public class PracticeDesPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_des_page);
 
+        kdtToeicDB = new KDTToeicDB(PracticeDesPageActivity.this);
         AnhXa();
 
         //Số câu
@@ -63,6 +66,9 @@ public class PracticeDesPageActivity extends AppCompatActivity {
         btStartPractice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //thêm lịch sử
+                kdtToeicDB.insertHistory("Luyện tập",0,Integer.parseInt(AmountQuestion), 0);
+
                 Intent intent = new Intent(PracticeDesPageActivity.this, PracticeActivity.class);
                 intent.putExtra("maxAmountQuestion", AmountQuestion);
                 startActivity(intent);
@@ -77,4 +83,5 @@ public class PracticeDesPageActivity extends AppCompatActivity {
         btStartPractice = findViewById(R.id.btStartPractice);
         spQuestionCount = findViewById(R.id.spQuestionCount);
     }
+
 }

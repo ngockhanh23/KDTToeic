@@ -1,10 +1,13 @@
 package com.example.kdttoeic.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,13 +15,16 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kdttoeic.R;
+import com.example.kdttoeic.TestDesPageActivity;
 import com.example.kdttoeic.model.Test;
 
 import java.util.List;
 
+import fragment.TestFragment;
+
 public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder> {
     private List<Test> myTest;
-   public Listener listener;
+    public Listener listener;
     public TestAdapter(List<Test> myTest, Listener listener) {
         this.listener = listener;
         this.myTest = myTest;
@@ -39,14 +45,10 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
             return;
         }
 
+
         holder.testTitle.setText(test.getTitle());
         holder.testDes.setText(test.getDescription());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listener.OnOpenExam(position, test);
-            }
-        });
+        holder.testBtn.setOnClickListener(v -> listener.OnOpenExam());
     }
 
     @Override
@@ -57,15 +59,17 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
     public static class TestViewHolder extends RecyclerView.ViewHolder {
         private TextView testTitle;
         private TextView testDes;
+        private Button testBtn;
 
         public TestViewHolder(@NonNull View itemView) {
             super(itemView);
             testTitle = itemView.findViewById(R.id.testTitle);
             testDes = itemView.findViewById(R.id.testDes);
+            testBtn = itemView.findViewById(R.id.testBtn);
         }
     }
 
     public interface Listener{
-        void OnOpenExam(int pos, Test test);
+        void OnOpenExam();
     }
 }

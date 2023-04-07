@@ -7,19 +7,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.kdttoeic.Data.KDTToeicDB;
 
 import java.util.ArrayList;
 
-public class PracFillSentenceActivity extends AppCompatActivity {
-
+public class TestDesPageActivity extends AppCompatActivity {
     TextView tvEnglish, tvTiengViet;
 
     Button btStartExam;
+    KDTToeicDB kdtToeicDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,29 +29,21 @@ public class PracFillSentenceActivity extends AppCompatActivity {
         tvEnglish = findViewById(R.id.tvEnglish);
         tvTiengViet = findViewById(R.id.tvTiengViet);
         btStartExam = findViewById(R.id.btStartExam);
+        kdtToeicDB = new KDTToeicDB(TestDesPageActivity.this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        tvEnglish.setText("No pain no gain");
-        tvTiengViet.setText("Không đau không trưởng thành");
         //Bắt đầu làm bài
         btStartExam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iOpenExam = new Intent(PracFillSentenceActivity.this, FillSentenceExam.class);
+                kdtToeicDB.insertHistory("Thi thử".trim(), 0, 5,0 );
+                Intent iOpenExam = new Intent(TestDesPageActivity.this, TestActivity.class);
                 startActivity(iOpenExam);
+                finish();
             }
         });
 
-
-        //Xử lí dropdownlist
-        ArrayList<String> AmountQuestion = new ArrayList<String>();
-        for (int i = 1; i <= 20; i++) {
-            AmountQuestion.add(i + "");
-        }
-
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, AmountQuestion);
-        arrayAdapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

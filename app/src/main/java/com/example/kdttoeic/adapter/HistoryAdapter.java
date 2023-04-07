@@ -36,7 +36,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
         History item = lstHistory.get(position);
 
-        if (item.getTopic().equals("Thi thử")){
+        if (item.getTopic().equals("Thi thử".trim())){
             holder.ivImageHistoryTopic.setImageResource(R.drawable.test_icon_history);
         }
 
@@ -45,11 +45,11 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         holder.tvTopicHistory.setText(item.getTopic());
         holder.tvAmountQuestionHistory.setText(String.valueOf(item.getAmountQuestion()));
         holder.tvMaxAmountQuestionHistory.setText(String.valueOf(item.getMaxAmountQuestion()));
-        holder.tvScoreHistory.setText(String.valueOf(item.getScore()));
+        holder.tvScoreHistory.setText(String.valueOf(Math.floor(item.getScore())));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(lstHistory.get(position));
+                listener.onItemClick(item.getId());
             }
         });
     }
@@ -68,15 +68,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
             tvTopicHistory = itemView.findViewById(R.id.tvTopicHistory);
             tvAmountQuestionHistory = itemView.findViewById(R.id.tvAmountQuestionHistory);
-            tvMaxAmountQuestionHistory = itemView.findViewById(R.id.tvAmountQuestionHistory);
+            tvMaxAmountQuestionHistory = itemView.findViewById(R.id.tvMaxAmountQuestionHistory);
             tvScoreHistory = itemView.findViewById(R.id.tvScoreHistory);
             ivImageHistoryTopic = itemView.findViewById(R.id.ivImageHistoryTopic);
-
         }
 
     }
     public interface Listener{
-        void onItemClick(History history);
+        void onItemClick(int idHistory);
     }
 
 
