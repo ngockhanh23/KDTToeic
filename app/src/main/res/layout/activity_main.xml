@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/bottommNav"
         android:layout_alignParentBottom="true"
-        android:background="#FFFFFF"
+        style="@style/BOTTOM_NAV_MENU"
         app:menu="@menu/bottom_nav_menu"
         app:itemTextColor="#009688"
         app:itemPaddingTop="3dp"

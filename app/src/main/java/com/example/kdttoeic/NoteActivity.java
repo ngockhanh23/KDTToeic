@@ -81,20 +81,11 @@ public class NoteActivity extends AppCompatActivity implements NoteAdapter.Liste
 
         rvNotes = findViewById(R.id.rvNotes);
         kdtToeicDB = new KDTToeicDB(NoteActivity.this);
-//        notes = new ArrayList<>();
-////        Note note = new Note(1, "Khánh ròm", "Tuổi con ngang con");
-////        notes.add(note);
-////        note = new Note(2, "Khải", "Trong cơn mơ a là chàng tỉ phú, tỉnh cơn lú anh là chú báo con");
-////        notes.add(note);
-////        note = new Note(3, "Đức", "Lớn già đầu còn bị dụ mất acc");
-////        notes.add(note);
-////        note = new Note(4, "Triều", "trieudeptrai123 đến là đón đụng là chạm");
-//        //notes.add(note);
         notes = kdtToeicDB.getNote();
 
         noteAdapter = new NoteAdapter(notes, this);
         rvNotes.setAdapter(noteAdapter);
-        rvNotes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        rvNotes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
         rvNotes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         getSupportActionBar().setTitle("Ghi chú");

@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.kdttoeic.HistoryActivity;
@@ -24,8 +25,7 @@ import com.example.kdttoeic.RegisterActivity;
 import com.example.kdttoeic.TextSizeActivity;
 
 public class SettingFragment extends Fragment {
-    Button btInterface, btAnswer, btHistory;
-    TextView tvTextSize;
+    TextView tvTextSize, btInterface, btAnswer, btHistory;
     //    TextView btHistory;
     boolean nightMode;
     SwitchCompat switchInterFace;

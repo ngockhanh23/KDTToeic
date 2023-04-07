@@ -32,9 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="The crime rate has continued to rise in American cities despite efforts on the part of both government and private citizens to curb ……………."
                 android:textColor="#fff"
-
                 android:textSize="15sp" />
-
         </LinearLayout>
 
 

@@ -2,15 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.KDTToeic" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/teal_200</item>
+        <item name="colorPrimaryVariant">@color/teal_200</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">#009688</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -26,6 +26,13 @@
         <item name="android:background">#000000</item>
     </style>
     <style name="BACKGROUND">
-        <item name="android:background">#EB1313</item>
+        <item name="android:background">#222</item>
+    </style>
+    <style name="BOTTOM_NAV_MENU">
+        <item name="android:background">#333</item>
+    </style>
+
+    <style name="TEXTVIEW_VOCAB">
+        <item name="android:textColor">#FFF</item>
     </style>
 </resources>
