@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import com.example.kdttoeic.HistoryActivity;
 import com.example.kdttoeic.R;
-import com.example.kdttoeic.RegisterActivity;
+
 import com.example.kdttoeic.TextSizeActivity;
 
 public class SettingFragment extends Fragment {

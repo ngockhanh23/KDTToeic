@@ -129,6 +129,7 @@ public class TestActivity extends AppCompatActivity {
                     tesOpC.setText(lstQuestion.get(count).getOpC());
                     tesOpD.setText(lstQuestion.get(count).getOpD());
                     correctAnswer = lstQuestion.get(count).getAnswer();
+                    optionUser = -1;
                     count++;
                 }
             }

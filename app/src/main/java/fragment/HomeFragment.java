@@ -16,7 +16,7 @@ import com.example.kdttoeic.NoteActivity;
 import com.example.kdttoeic.PracFillSentenceActivity;
 import com.example.kdttoeic.PracticeDesPageActivity;
 import com.example.kdttoeic.R;
-import com.example.kdttoeic.RegisterActivity;
+
 import com.example.kdttoeic.VocabCatActivity;
 
 

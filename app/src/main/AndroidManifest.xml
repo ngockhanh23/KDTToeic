@@ -58,10 +58,25 @@
             android:name=".PracticeActivity"
             android:exported="false" />
         <activity
+            android:name=".TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TestDesPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".ResultTestActivity"
             android:exported="false" />
         <activity
             android:name=".PracticeDesPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VocabCatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WordVocabCatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WordDetailActivitty"
             android:exported="false" />
         <activity
             android:name=".WaitingScreenActivity"
@@ -76,22 +91,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false" />
+
         <activity
             android:name=".DetailsAnswerActivity"
             android:exported="false" />
+
         <activity
             android:name=".TextSizeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
     </application>
 
-
 </manifest>
+

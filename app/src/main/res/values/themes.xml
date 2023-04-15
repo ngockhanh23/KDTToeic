@@ -25,7 +25,7 @@
         <item name="android:textColor">#009688</item>
     </style>
     <style name="BACKGROUND">
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:background">#F4F4F4</item>
     </style>
     <style name="BOTTOM_NAV_MENU">
         <item name="android:background">#FFF</item>

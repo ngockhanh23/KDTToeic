@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,7 +27,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class PracticeActivity extends AppCompatActivity {
-
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    String filename = "config";
     KDTToeicDB kdtToeicDB;
     TextView tvQuestionPractice, tvAmountQuestionTest, tvMaxAmountQuestionTest;
     RadioGroup rgOptionsQuestion;
@@ -39,6 +43,8 @@ public class PracticeActivity extends AppCompatActivity {
     private int countCorrectAnswer = 0;  // số câu đúng
     private int correctAnswer ;
     private int optionUser = -1;
+
+    int textsize;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +56,10 @@ public class PracticeActivity extends AppCompatActivity {
 
 //        Collections.shuffle(lstQuestion);
 
+        sharedPreferences = getSharedPreferences(filename, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        textsize = sharedPreferences.getInt("textsize", 16);
+        changeTextSize(textsize);
 
 
         tvQuestionPractice.setText(lstQuestion.get(0).getContent());
@@ -139,6 +149,7 @@ public class PracticeActivity extends AppCompatActivity {
                     rbOpC.setText(lstQuestion.get(count).getOpC());
                     rbOpD.setText(lstQuestion.get(count).getOpD());
                     correctAnswer = lstQuestion.get(count).getAnswer();
+                    optionUser =-1;
                     count++;
                     tvAmountQuestionTest.setText(String.valueOf(count));
 
@@ -153,6 +164,10 @@ public class PracticeActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Luyện tập");
 
+    }
+
+    private void changeTextSize(int textsize) {
+        tvQuestionPractice.setTextSize(textsize);
     }
 
     void AnhXa(){
@@ -209,14 +224,14 @@ public class PracticeActivity extends AppCompatActivity {
 
     void AddQuestion(){
 //
-//        lstQuestion = kdtToeicDB.getQuestion();
+        lstQuestion = kdtToeicDB.getQuestion();
 
-        lstQuestion = new ArrayList<>();
-        lstQuestion.add(new Question(1,"Who are all ________ people?", "","","this","those","them","that",2,1,0,1));
-        lstQuestion.add(new Question(2,"I ____ a car next year", "","","buy","am buying","going to buy","bought",2,2,0,1));
-        lstQuestion.add(new Question(3,"When do you go _____ bed?","","" ,"to","to the","in","in the",1,2,0,1));
-        lstQuestion.add(new Question(4,"London is famous for _____ red buses","","", "it's","its","it","is it",2,1,0,1));
-        lstQuestion.add(new Question(5,"Is there _____ milk in the fridge?","","", "a lot ","many","much","some",4,2,1,3));
+//        lstQuestion = new ArrayList<>();
+//        lstQuestion.add(new Question(1,"Who are all ________ people?", "","","this","those","them","that",2,1,0,1));
+//        lstQuestion.add(new Question(2,"I ____ a car next year", "","","buy","am buying","going to buy","bought",2,2,0,1));
+//        lstQuestion.add(new Question(3,"When do you go _____ bed?","","" ,"to","to the","in","in the",1,2,0,1));
+//        lstQuestion.add(new Question(4,"London is famous for _____ red buses","","", "it's","its","it","is it",2,1,0,1));
+//        lstQuestion.add(new Question(5,"Is there _____ milk in the fridge?","","", "a lot ","many","much","some",4,2,1,3));
 
     }
 }
