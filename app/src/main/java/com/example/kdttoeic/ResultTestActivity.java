@@ -43,7 +43,7 @@ public class ResultTestActivity extends AppCompatActivity {
         tvCore.setText(String.valueOf(Math.floor(score)));
 
         if(score < 50 ){
-            tvCommentResult.setText("Dở, cần học thêm nhiều");
+            tvCommentResult.setText("Tiếng anh như con cặc, cần học thêm nhiều");
         }
         else {
             tvCommentResult.setText("Chúc mừng bạn đã hoàn thành bài làm");

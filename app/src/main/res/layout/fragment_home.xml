@@ -40,88 +40,100 @@
                 android:columnCount="3">
 
 
-               <androidx.cardview.widget.CardView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_gravity="center"
-                   app:cardCornerRadius="20dp">
-                   <!--item_1-->
-                   <LinearLayout
-                       android:id="@+id/btImageDes"
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       android:gravity="center"
-                       android:orientation="vertical"
-
-                       tools:ignore="MissingConstraints"
-                       android:elevation="5dp"
-                       android:padding="5dp"
-                       android:layout_margin="10dp">
-                       <ImageView
-                           android:layout_width="50dp"
-                           android:layout_height="50dp"
-                           android:src="@drawable/mota_hinhanh_icon"
-                           />
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="Mô tả hình ảnh"
-                           android:gravity="center"
-                           android:paddingTop="10dp"/>
-                   </LinearLayout>
-                   <!-- end_item_1-->
-
-               </androidx.cardview.widget.CardView>
-                <!--item_2-->
-                <LinearLayout
-                    android:id="@+id/btAskAndAnswer"
+                <!--item_1-->
+                <androidx.cardview.widget.CardView
                     android:layout_width="110dp"
                     android:layout_height="110dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-
-                    tools:ignore="MissingConstraints"
-                    android:elevation="5dp"
-                    android:padding="5dp"
-                    android:layout_margin="10dp">
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/hoi_dap_icon"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hỏi &amp; Đáp"
+                    android:layout_gravity="center"
+                    app:cardElevation="7dp"
+                    android:layout_margin="10dp"
+                    app:cardCornerRadius="10dp">
+                    <!--item_1-->
+                    <LinearLayout
+                        android:id="@+id/btImageDes"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        style="@style/TEXTVIEW_VOCAB"
-                        android:paddingTop="10dp"/>
-                </LinearLayout>
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        >
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/mota_hinhanh_icon"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mô tả hình ảnh"
+                            android:gravity="center"
+                            android:paddingTop="10dp"/>
+                    </LinearLayout>
+                    <!-- end_item_1-->
+
+                </androidx.cardview.widget.CardView>
+                <!-- end_item_1-->
+                <!--item_2-->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
+                    app:cardElevation="7dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_margin="10dp"  >
+
+                    <LinearLayout
+                        android:id="@+id/btAskAndAnswer"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/hoi_dap_icon"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hỏi &amp; Đáp"
+                            android:gravity="center"
+                            android:paddingTop="10dp"/>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
                 <!-- end_item_2-->
                 <!--item_3-->
-                <LinearLayout
-                    android:id="@+id/btConversation"
+                <androidx.cardview.widget.CardView
                     android:layout_width="110dp"
                     android:layout_height="110dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@drawable/radius_background"
-                    tools:ignore="MissingConstraints"
-                    android:elevation="5dp"
-                    android:padding="5dp"
-                    android:layout_margin="10dp">
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/nghe_hieu_icon"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Đoạn hội thoại"
+                    android:layout_gravity="center"
+                    app:cardElevation="7dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_margin="10dp" >
+
+                    <LinearLayout
+                        android:id="@+id/btConversation"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:paddingTop="10dp"/>
-                </LinearLayout>
+                        android:orientation="vertical"
+                        android:padding="5dp">
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/nghe_hieu_icon"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Đoạn hội thoại"
+                            android:gravity="center"
+                            android:paddingTop="10dp"/>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
                 <!-- end_item_3-->
 
             </GridLayout>
@@ -153,79 +165,92 @@
                 android:columnCount="3">
 
                 <!--item_1-->
-                <LinearLayout
-                    android:id="@+id/btFillSentence"
+                <androidx.cardview.widget.CardView
                     android:layout_width="110dp"
                     android:layout_height="110dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@drawable/radius_background"
-                    tools:ignore="MissingConstraints"
-                    android:elevation="5dp"
-                    android:padding="5dp"
+                    android:layout_gravity="center"
+                    app:cardElevation="7dp"
+                    app:cardCornerRadius="10dp"
                     android:layout_margin="10dp">
-
-                    <ImageView
-                        android:layout_width="49dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/reading_1_icon" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Điền vào câu"
+                    <LinearLayout
+                        android:id="@+id/btFillSentence"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:paddingTop="10dp"/>
-                </LinearLayout>
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:layout_width="49dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/reading_1_icon" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Điền vào câu"
+                            android:gravity="center"
+                            android:paddingTop="10dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
                 <!-- end_item_1-->
                 <!--item_2-->
-                <LinearLayout
-                    android:id="@+id/btFillParagraph"
+                <androidx.cardview.widget.CardView
                     android:layout_width="110dp"
                     android:layout_height="110dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@drawable/radius_background"
-                    tools:ignore="MissingConstraints"
-                    android:elevation="5dp"
-                    android:padding="5dp"
+                    android:layout_gravity="center"
+                    app:cardElevation="7dp"
+                    app:cardCornerRadius="10dp"
                     android:layout_margin="10dp">
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/reading_2_icon"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Điền vào đoạn văn"
+                    <LinearLayout
+                        android:id="@+id/btFillParagraph"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:paddingTop="10dp"/>
-                </LinearLayout>
+                        android:orientation="vertical"
+                        android:padding="5dp">
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/reading_2_icon"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Điền vào đoạn văn"
+                            android:gravity="center"
+                            android:paddingTop="10dp"/>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
                 <!-- end_item_2-->
                 <!--item_3-->
-                <LinearLayout
-                    android:id="@+id/btReadAndUndersand"
+                <androidx.cardview.widget.CardView
                     android:layout_width="110dp"
                     android:layout_height="110dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@drawable/radius_background"
-                    tools:ignore="MissingConstraints"
-                    android:elevation="5dp"
-                    android:padding="5dp"
+                    android:layout_gravity="center"
+                    app:cardElevation="7dp"
+                    app:cardCornerRadius="10dp"
                     android:layout_margin="10dp">
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/reading_3_icon"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Đọc hiểu đoạn văn"
+                    <LinearLayout
+                        android:id="@+id/btReadAndUndersand"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:paddingTop="10dp"/>
-                </LinearLayout>
+                        android:orientation="vertical"
+                        android:padding="5dp">
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/reading_3_icon"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Đọc hiểu đoạn văn"
+                            android:gravity="center"
+                            android:paddingTop="10dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
                 <!-- end_item_3-->
 
             </GridLayout>
@@ -255,79 +280,91 @@
                 android:columnCount="3">
 
                 <!--item_1-->
-                <LinearLayout
-                    android:id="@+id/btTest"
+                <androidx.cardview.widget.CardView
                     android:layout_width="110dp"
                     android:layout_height="110dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@drawable/radius_background"
-                    tools:ignore="MissingConstraints"
-                    android:elevation="5dp"
-                    android:padding="5dp"
+                    android:layout_gravity="center"
+                    app:cardElevation="7dp"
+                    app:cardCornerRadius="10dp"
                     android:layout_margin="10dp">
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/practice_1_icon"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Thi thử"
+                    <LinearLayout
+                        android:id="@+id/btTest"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:paddingTop="10dp"/>
-                </LinearLayout>
+                        android:orientation="vertical"
+                        android:padding="5dp">
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/practice_1_icon"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Thi thử"
+                            android:gravity="center"
+                            android:paddingTop="10dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
                 <!-- end_item_1-->
                 <!--item_2-->
-                <LinearLayout
-                    android:id="@+id/btVocabulary"
+                <androidx.cardview.widget.CardView
                     android:layout_width="110dp"
                     android:layout_height="110dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@drawable/radius_background"
-
-                    android:elevation="5dp"
-                    android:padding="5dp"
+                    android:layout_gravity="center"
+                    app:cardElevation="7dp"
+                    app:cardCornerRadius="10dp"
                     android:layout_margin="10dp">
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/baseline_translate_24"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Từ vựng"
+                    <LinearLayout
+                        android:id="@+id/btVocabulary"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:paddingTop="10dp"/>
-                </LinearLayout>
+                        android:orientation="vertical"
+                        android:padding="5dp">
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/baseline_translate_24"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Từ vựng"
+                            android:gravity="center"
+                            android:paddingTop="10dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
                 <!-- end_item_2-->
                 <!--item_3-->
-                <LinearLayout
-                    android:id="@+id/btTakeNote"
+                <androidx.cardview.widget.CardView
                     android:layout_width="110dp"
                     android:layout_height="110dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@drawable/radius_background"
-                    tools:ignore="MissingConstraints"
-                    android:elevation="5dp"
-                    android:padding="5dp"
+                    android:layout_gravity="center"
+                    app:cardElevation="7dp"
+                    app:cardCornerRadius="10dp"
                     android:layout_margin="10dp">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="46dp"
-                        android:src="@drawable/baseline_edit_note_24" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ghi chú"
+                    <LinearLayout
+                        android:id="@+id/btTakeNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:gravity="center"
-                        android:paddingTop="10dp"/>
-                </LinearLayout>
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="46dp"
+                            android:src="@drawable/baseline_edit_note_24" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ghi chú"
+                            android:gravity="center"
+                            android:paddingTop="10dp"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
                 <!-- end_item_3-->
 
             </GridLayout>
