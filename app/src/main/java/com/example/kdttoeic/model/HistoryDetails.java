@@ -8,6 +8,7 @@ public class HistoryDetails {
         this.correctAnswer = correctAnswer;
         this.idQuestion = idQuestion;
     }
+
     int id;
     int idHistory;
     int selectedOptionUser;

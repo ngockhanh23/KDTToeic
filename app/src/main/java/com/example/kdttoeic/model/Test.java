@@ -26,4 +26,12 @@ public class Test {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getMucde() {
+        return mucde;
+    }
+
+    public void setMucde(String mucde) {
+        this.mucde = mucde;
+    }
 }

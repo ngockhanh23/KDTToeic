@@ -265,6 +265,18 @@ public class KDTToeicDB {
         return lstAnswer;
     }
 
+
+
+
+
+    //Lấy số lượng lịch sử bài làm
+    public int countHistoryDetail( int idHistory){
+        String sql = "SELECT * FROM tblHistoryDetails where ID_HISTORY ="+idHistory;
+        db = openDB();
+        Cursor cursor = db.rawQuery(sql, null);
+        return cursor.getCount();
+    }
+
     //Thêm chi tiết đáp án
     public void insertHistoryDetails(int idHistory, int selectOptionUser, int correctAnswer, int idQuestion){
         db = openDB();
@@ -291,8 +303,4 @@ public class KDTToeicDB {
         db.delete("tblHistoryDetails", "", null);
         db.close();
     }
-
-
-
-
 }

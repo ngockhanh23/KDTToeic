@@ -8,15 +8,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.kdttoeic.NoteActivity;
 import com.example.kdttoeic.PracFillSentenceActivity;
 import com.example.kdttoeic.PracticeDesPageActivity;
 import com.example.kdttoeic.R;
-import com.example.kdttoeic.RegisterActivity;
 import com.example.kdttoeic.VocabCatActivity;
 
 
@@ -122,10 +119,7 @@ public class HomeFragment extends Fragment {
     private void openTestFragment(){
         Intent intent = new Intent(getActivity(), TestFragment.class);
         startActivity(intent);
-        
     }
-
-
 
 
 }

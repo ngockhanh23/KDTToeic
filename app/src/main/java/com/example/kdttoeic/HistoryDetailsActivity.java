@@ -18,6 +18,7 @@ import com.example.kdttoeic.adapter.HistoryDetailsAdapter;
 import com.example.kdttoeic.model.History;
 import com.example.kdttoeic.model.HistoryDetails;
 import com.example.kdttoeic.model.Question;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,8 @@ public class HistoryDetailsActivity extends AppCompatActivity implements History
         rvHistoryDetails.setAdapter(historyDetailsAdapter);
         rvHistoryDetails.addItemDecoration(new DividerItemDecoration(HistoryDetailsActivity.this,DividerItemDecoration.VERTICAL));
 
+        historyDetailsAdapter.notifyDataSetChanged();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -54,8 +57,7 @@ public class HistoryDetailsActivity extends AppCompatActivity implements History
         return super.onOptionsItemSelected(item);
     }
 
-    public void LoadData(int id){
-
+    public void LoadData(int id) {
         lstAnswer = kdtToeicDB.getAnswerList(id);
     }
 

@@ -48,7 +48,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
 
         holder.testTitle.setText(test.getTitle());
         holder.testDes.setText(test.getDescription());
-        holder.testBtn.setOnClickListener(v -> listener.OnOpenExam());
+        holder.testBtn.setOnClickListener(v -> listener.OnOpenExam(test.getMucde()));
     }
 
     @Override
@@ -70,6 +70,6 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
     }
 
     public interface Listener{
-        void OnOpenExam();
+        void OnOpenExam(String mucde);
     }
 }

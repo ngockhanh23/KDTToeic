@@ -62,8 +62,6 @@ public class PracticeActivity extends AppCompatActivity {
 
         History lastHistory = kdtToeicDB.getHistory().get(kdtToeicDB.countHistory()-1);
 
-
-
         //Bắt sự kiện người dùng chọn đáp án
         rgOptionsQuestion.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -142,6 +140,7 @@ public class PracticeActivity extends AppCompatActivity {
                     count++;
                     tvAmountQuestionTest.setText(String.valueOf(count));
 
+                    
                }
 
 
@@ -208,15 +207,8 @@ public class PracticeActivity extends AppCompatActivity {
     }
 
     void AddQuestion(){
-//
-//        lstQuestion = kdtToeicDB.getQuestion();
 
-        lstQuestion = new ArrayList<>();
-        lstQuestion.add(new Question(1,"Who are all ________ people?", "","","this","those","them","that",2,1,0,1));
-        lstQuestion.add(new Question(2,"I ____ a car next year", "","","buy","am buying","going to buy","bought",2,2,0,1));
-        lstQuestion.add(new Question(3,"When do you go _____ bed?","","" ,"to","to the","in","in the",1,2,0,1));
-        lstQuestion.add(new Question(4,"London is famous for _____ red buses","","", "it's","its","it","is it",2,1,0,1));
-        lstQuestion.add(new Question(5,"Is there _____ milk in the fridge?","","", "a lot ","many","much","some",4,2,1,3));
+        lstQuestion = kdtToeicDB.getQuestion();
 
     }
 }

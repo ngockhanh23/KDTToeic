@@ -30,6 +30,9 @@ public class TestDesPageActivity extends AppCompatActivity {
         tvTiengViet = findViewById(R.id.tvTiengViet);
         btStartExam = findViewById(R.id.btStartExam);
         kdtToeicDB = new KDTToeicDB(TestDesPageActivity.this);
+        Intent intent = getIntent();
+        String mucde = intent.getStringExtra("mucde");
+        tvEnglish.setText(mucde);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

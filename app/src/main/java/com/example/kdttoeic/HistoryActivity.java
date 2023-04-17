@@ -20,16 +20,27 @@ import android.widget.Toast;
 
 import com.example.kdttoeic.Data.KDTToeicDB;
 import com.example.kdttoeic.adapter.HistoryAdapter;
+import com.example.kdttoeic.adapter.HistoryDetailsAdapter;
 import com.example.kdttoeic.model.History;
+import com.example.kdttoeic.model.HistoryDetails;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
+import fragment.SettingFragment;
 
 public class HistoryActivity extends AppCompatActivity implements HistoryAdapter.Listener {
     RecyclerView rvHistory;
     ArrayList<History> lstHistory;
     HistoryAdapter historyAdapter;
     KDTToeicDB kdtToeicDB;
-
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +49,9 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
 
         rvHistory = findViewById(R.id.rvHistory);
         kdtToeicDB = new KDTToeicDB(HistoryActivity.this);
-        LoadData();
+        db = FirebaseFirestore.getInstance();
 
+        LoadData();
 
         historyAdapter = new HistoryAdapter(HistoryActivity.this,lstHistory);
 
@@ -48,15 +60,10 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
 
         rvHistory.addItemDecoration(new DividerItemDecoration(HistoryActivity.this,DividerItemDecoration.VERTICAL));
 
-
-
         getSupportActionBar().setTitle("Lịch sử");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
     }
 
-    
 
     void LoadData(){
         lstHistory = kdtToeicDB.getHistory();
@@ -92,8 +99,31 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
             case R.id.mnClearAllHistory:
                 optionClearAllHistory();
                 break;
+            case R.id.mnBackupDataHistory:
+                optionBackupDataHistory();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    void optionBackupDataHistory(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(HistoryActivity.this);
+        builder.setTitle("Phục hồi dữ liệu");
+        builder.setMessage("Dữ liệu bài làm cũ sẽ được phục hồi, bạn có muốn tiếp tục?");
+        builder.setPositiveButton("Phục hồi", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               backupDataHistory();
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.show();
+        alertDialog.show();
     }
 
     void optionClearAllHistory(){
@@ -136,6 +166,68 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
         alertDialog.show();
     }
 
+    private void backupDataHistory() {
+        clearAllHistory();
+        db.collection("Thi thu")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @SuppressLint("NotifyDataSetChanged")
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for(QueryDocumentSnapshot document : task.getResult()) {
+//                            int Id = Integer.parseInt(document.getId());
+                            int idHis = Integer.parseInt(document.get("id").toString());
+                            String topic = document.get("topic").toString();
+                            int amountQuestion = Integer.parseInt(document.get("amountQuestion").toString());
+                            int maxAmountQuestion = Integer.parseInt(document.get("maxAmountQuestion").toString());
+                            float score = Float.parseFloat(document.get("score").toString());
+
+                            kdtToeicDB.insertHistory(topic, amountQuestion, maxAmountQuestion, score);
+                            History lastHistory = kdtToeicDB.getHistory().get(kdtToeicDB.getHistory().size()-1);
+
+
+                            db.collection("Chi tiet bai thi")
+                                    .get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @SuppressLint("NotifyDataSetChanged")
+
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                                int id = Integer.parseInt(document.get("id").toString());
+                                                int idHistoryFB = Integer.parseInt(document.get("idHistory").toString());
+
+                                                if (idHis == idHistoryFB) {
+                                                    int idHistory = lastHistory.getId();
+                                                    int idQuestion = Integer.parseInt(document.get("idQuestion").toString());
+                                                    int selectedOptionUser = Integer.parseInt(document.get("selectedOptionUser").toString());
+                                                    int correctAnswer = Integer.parseInt(document.get("correctAnswer").toString());
+                                                    kdtToeicDB.insertHistoryDetails(idHistory, selectedOptionUser, correctAnswer, idQuestion);
+                                                }
+                                            }
+
+                                        }
+                                    });
+
+
+
+
+
+                        }
+                        lstHistory.clear();
+                        lstHistory.addAll(kdtToeicDB.getHistory());
+                        historyAdapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(HistoryActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
     private void deleteItemHistory() {
 
         for(int i = rvHistory.getChildCount()-1; i>=0;i--){
@@ -154,17 +246,10 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
         historyAdapter.notifyDataSetChanged();
     }
 
-
     private void clearAllHistory() {
         kdtToeicDB.clearHistoryDetails();
         kdtToeicDB.clearHistory();
         lstHistory.clear();
-        lstHistory.addAll(kdtToeicDB.getHistory());
         historyAdapter.notifyDataSetChanged();
-
     }
-
-
-
-
 }

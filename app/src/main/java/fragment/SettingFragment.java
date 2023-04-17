@@ -1,12 +1,15 @@
 package fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
@@ -15,24 +18,39 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.kdttoeic.Data.KDTToeicDB;
 import com.example.kdttoeic.HistoryActivity;
+import com.example.kdttoeic.PracticeActivity;
 import com.example.kdttoeic.R;
-import com.example.kdttoeic.RegisterActivity;
 import com.example.kdttoeic.TextSizeActivity;
+import com.example.kdttoeic.adapter.HistoryAdapter;
+import com.example.kdttoeic.model.History;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class SettingFragment extends Fragment {
-    TextView tvTextSize, btInterface, btAnswer, btHistory;
+    TextView tvTextSize, btInterface, btAnswer, btHistory, tvBackup;
     //    TextView btHistory;
     boolean nightMode;
     SwitchCompat switchInterFace;
+//    KDTToeicDB kdtToeicDB;
+//    HistoryActivity historyActivity = new HistoryActivity();
+//    HistoryAdapter historyAdapter;
 
     String filename = "config";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+//    private FirebaseFirestore db;
+//    ArrayList<History> lstHistory = new ArrayList<>();
 
 //    @Override
 //    public void onCreate(Bundle savedInstanceState) {
@@ -44,11 +62,10 @@ public class SettingFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
 
-
         return view;
     }
 
-//    @Override
+    //    @Override
 //    public void onResume() {
 //        super.onResume();
 //        if (sharedPreferences != null) {
@@ -109,6 +126,7 @@ public class SettingFragment extends Fragment {
                 startActivity(i);
             }
         });
+
     }
 
     @NonNull
@@ -121,7 +139,6 @@ public class SettingFragment extends Fragment {
         };
     }
 
-
     void OpenHistory() {
         Intent intent = new Intent(getActivity(), HistoryActivity.class);
         startActivity(intent);
@@ -133,6 +150,7 @@ public class SettingFragment extends Fragment {
         btHistory = view.findViewById(R.id.btHistory);
         tvTextSize = view.findViewById(R.id.tvTextSize);
         switchInterFace = view.findViewById(R.id.switchInterFace);
+        tvBackup =  view.findViewById(R.id.tvBackup);
     }
 
     void loadFragment(Fragment fmNew) {

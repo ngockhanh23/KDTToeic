@@ -46,9 +46,9 @@ public class TestFragment extends Fragment implements TestAdapter.Listener {
         testAdapter = new TestAdapter(myTest, this);
         rcvTest.setAdapter(testAdapter);
 
-        Test test1 = new Test("De thi 1", "200 cau","200");
-        Test test2 = new Test("De thi 2", "200 cau", "100");
-        Test test3 = new Test("De thi 3", "200 cau","600");
+        Test test1 = new Test("De thi 1", "200 cau","300 - 500");
+        Test test2 = new Test("De thi 2", "200 cau", "500 - 700");
+        Test test3 = new Test("De thi 3", "200 cau","700 - 900");
 
         myTest.add(test1);
         myTest.add(test2);
@@ -56,7 +56,6 @@ public class TestFragment extends Fragment implements TestAdapter.Listener {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rcvTest.setLayoutManager(linearLayoutManager);
-
     }
 
     @Override
@@ -69,8 +68,9 @@ public class TestFragment extends Fragment implements TestAdapter.Listener {
     }
 
     @Override
-    public void OnOpenExam() {
+    public void OnOpenExam(String mucde) {
         Intent intent = new Intent(getActivity(), TestDesPageActivity.class);
+        intent.putExtra("mucde", mucde);
         startActivity(intent);
     }
 }

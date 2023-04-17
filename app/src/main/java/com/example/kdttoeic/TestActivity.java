@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Menu;
@@ -19,7 +21,10 @@ import android.widget.TextView;
 
 import com.example.kdttoeic.Data.KDTToeicDB;
 import com.example.kdttoeic.model.History;
+import com.example.kdttoeic.model.HistoryDetails;
 import com.example.kdttoeic.model.Question;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +35,11 @@ public class TestActivity extends AppCompatActivity {
     RadioButton tesOpA, tesOpB, tesOpC, tesOpD;
     Button btTesNextQuestion;
     CountDownTimer cdt;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    String filename = "config";
+    int textsize;
+    FirebaseFirestore db;
 
     KDTToeicDB kdtToeicDB;
 
@@ -39,6 +49,7 @@ public class TestActivity extends AppCompatActivity {
     private int maxAmountQuestion;
     private int correctAnswer ;
     private int optionUser = -1;
+    private ArrayList<HistoryDetails> lstHitoryDetails;
 
 
     @Override
@@ -50,8 +61,15 @@ public class TestActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         kdtToeicDB = new KDTToeicDB(TestActivity.this);
+        db = FirebaseFirestore.getInstance();
+
         AnhXa();
         AddQuestion();
+
+        sharedPreferences = getSharedPreferences(filename, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        textsize = sharedPreferences.getInt("textsize", 16);
+        changeTextSize(textsize);
 
         tvQuestionDes.setText(lstQuestion.get(0).getContent());
         tesOpA.setText(lstQuestion.get(0).getOpA());
@@ -61,7 +79,9 @@ public class TestActivity extends AppCompatActivity {
 
         correctAnswer = lstQuestion.get(0).getAnswer();
 
+        // Lich su bai thi moi nhat
         History lastHistory = kdtToeicDB.getHistory().get(kdtToeicDB.countHistory() - 1);
+        lstHitoryDetails = new ArrayList<>();
 
         tesOptionsQuestion.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -99,27 +119,53 @@ public class TestActivity extends AppCompatActivity {
                 {
                     kdtToeicDB.insertHistoryDetails(lastHistory.getId(), optionUser, correctAnswer, lstQuestion.get(count-1).getId());
 
+                    HistoryDetails lastHistoryDetails = kdtToeicDB.getAnswerList(lastHistory.getId()).get(kdtToeicDB.countHistoryDetail(lastHistory.getId())-1);
+                    lstHitoryDetails.add(lastHistoryDetails);
+
                     Intent intent = new Intent(TestActivity.this, ResultTestActivity.class);
                     intent.putExtra("countCorrectAnswer", countCorrectAnswer);
                     intent.putExtra("maxAmountQuestion", maxAmountQuestion);
 
                     float score = (float) countCorrectAnswer / (float) maxAmountQuestion * 100;
 
+                    // Cap nhat du lieu bai lam len lich su bai lam
                     kdtToeicDB.updateHistory(lastHistory.getId(), countCorrectAnswer, maxAmountQuestion, score);
+
+                    // Dua du lieu len firestore
+                    db.collection("Thi thu").document("" + lastHistory.getId())
+                                    .set(kdtToeicDB.getHistory().get(kdtToeicDB.countHistory() - 1), SetOptions.merge());
+
+                    for(int i = 0; i < lstHitoryDetails.size(); i++)
+                    {
+                        db.collection("Chi tiet bai thi").add(lstHitoryDetails.get(i));
+                    }
+
                     startActivity(intent);
                     finish();
                 }
 
-//                Toast.makeText(PracticeActivity.this,optionUser,Toast.LENGTH_LONG).show();
-
                 else{
 
                     //thêm lịch sử đáp án
-                    if(count ==1){
+                    if(count == 1){
                         kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(0).getId());
+                        // Chi tiet lich su bai thi moi nhat
+                        HistoryDetails lastHistoryDetails = kdtToeicDB
+                                .getAnswerList(lastHistory.getId())
+                                .get(kdtToeicDB.countHistoryDetail(lastHistory.getId())-1);
+
+                        lstHitoryDetails.add(lastHistoryDetails);
                     }
+
                     else {
-                        kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(count-1).getId());
+                        kdtToeicDB.insertHistoryDetails(lastHistory.getId()
+                                ,optionUser,correctAnswer,lstQuestion.get(count-1).getId());
+                        // Chi tiet lich su bai thi moi nhat
+                        HistoryDetails lastHistoryDetails = kdtToeicDB
+                                .getAnswerList(lastHistory.getId())
+                                .get(kdtToeicDB.countHistoryDetail(lastHistory.getId())-1);
+
+                        lstHitoryDetails.add(lastHistoryDetails);
                     }
 
                     tesOptionsQuestion.clearCheck();
@@ -129,12 +175,17 @@ public class TestActivity extends AppCompatActivity {
                     tesOpC.setText(lstQuestion.get(count).getOpC());
                     tesOpD.setText(lstQuestion.get(count).getOpD());
                     correctAnswer = lstQuestion.get(count).getAnswer();
+                    optionUser = -1;
                     count++;
+
+
                 }
             }
         });
 
-        cdt = new CountDownTimer(15000, 1000) {
+
+
+        cdt = new CountDownTimer(150000, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -159,6 +210,15 @@ public class TestActivity extends AppCompatActivity {
         }.start();
 
         getSupportActionBar().setTitle("Luyện tập");
+    }
+
+    void changeTextSize(int textsize)
+    {
+        tvQuestionDes.setTextSize(textsize);
+        tesOpA.setTextSize(textsize);
+        tesOpB.setTextSize(textsize);
+        tesOpC.setTextSize(textsize);
+        tesOpD.setTextSize(textsize);
     }
 
     void AnhXa(){

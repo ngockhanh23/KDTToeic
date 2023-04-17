@@ -110,8 +110,6 @@ public class SearchFragment extends Fragment implements WordAdapter.Listener {
         rvSearch.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         rvSearch.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         rvSearch.setAdapter(wordAdapter);
-
-
     }
 
     @Override

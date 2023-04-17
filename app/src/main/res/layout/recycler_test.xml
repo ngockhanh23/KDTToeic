@@ -15,7 +15,8 @@
         android:translationX="5dp"
         android:translationZ="2dp"
         app:cardCornerRadius="16dp"
-        app:cardElevation="4dp">
+        app:cardElevation="4dp"
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"

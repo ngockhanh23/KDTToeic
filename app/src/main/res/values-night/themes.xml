@@ -17,7 +17,7 @@
 <!--    Dark mode-->
 <!--    Screen background id light mode off-->
     <style name="SCREEN">
-        <item name="android:background">#FFF</item>
+        <item name="android:background">#000000</item>
     </style>
 
 <!--    Texts bacground if light mode off-->
