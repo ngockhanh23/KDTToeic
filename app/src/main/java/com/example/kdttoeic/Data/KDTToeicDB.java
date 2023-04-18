@@ -235,6 +235,27 @@ public class KDTToeicDB {
         db.close();
     }
 
+    //Lấy object lịch sử mới nhất
+
+    public History lastHistory(){
+
+
+        String sql = "SELECT * FROM tblHistory";
+        db = openDB();
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToLast()){
+            int id = cursor.getInt(0);
+            String topic = cursor.getString(1);
+            int amountQuestion = cursor.getInt(2);
+            int maxAmountQuestion = cursor.getInt(3);
+            float score = cursor.getFloat(4);
+            return new History(id,topic,amountQuestion, maxAmountQuestion, score);
+        }
+        db.close();
+        return null;
+    }
+
+
     //Lấy số lượng lịch sử bài làm
     public int countHistory(){
         String sql = "SELECT * FROM tblHistory";
@@ -246,8 +267,7 @@ public class KDTToeicDB {
     //Load danh sách đáp án theo lịch sử kiểm tra
     public ArrayList<HistoryDetails> getAnswerList(int idHistory){
         ArrayList<HistoryDetails> lstAnswer = new ArrayList<>();
-//        String sql = "SELECT * FROM tblHistoryDetails WHELE ID_HISTORY = " + String.valueOf(idHistory)  ;
-//        String sql = "SELECT * FROM tblHistoryDetails" ;
+//
         String sql = "SELECT * FROM tblHistoryDetails where ID_HISTORY ="+idHistory;
 
         db = openDB();
@@ -264,6 +284,7 @@ public class KDTToeicDB {
         db.close();
         return lstAnswer;
     }
+
 
 
 
@@ -287,6 +308,24 @@ public class KDTToeicDB {
         cv.put("ID_QUESTION", idQuestion);
         db.insert("tblHistoryDetails", null, cv);
         db.close();
+    }
+
+    //Lấy chi tiết đáp án mới nhất theo id lịch sử
+    public HistoryDetails lastHistoryDetails(int idHistory){
+        String sql = "SELECT * FROM tblHistoryDetails where ID_HISTORY ="+idHistory;
+        db = openDB();
+        Cursor cursor = db.rawQuery(sql,null);
+        while (cursor.moveToLast()){
+            int id = cursor.getInt(0);
+            int id_History = cursor.getInt(1);
+            int selectOptionUser = cursor.getInt(2);
+            int correctAnswer = cursor.getInt(3);
+            int idQuestion = cursor.getInt(4);
+            HistoryDetails lastHistoryDetails = new HistoryDetails(id,id_History,selectOptionUser, correctAnswer, idQuestion);
+            return lastHistoryDetails;
+        }
+        db.close();
+        return null;
     }
 
     //Xóa chi tiết đáp án

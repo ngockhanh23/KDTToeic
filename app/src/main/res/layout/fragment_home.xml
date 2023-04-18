@@ -21,127 +21,7 @@
             android:layout_height="166dp"
             android:src="@drawable/slider"
             />
-        <!--content_1-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
-            <TextView
-                android:id="@+id/tvListeningTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nghe Hiểu"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
-            <GridLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvListeningTitle"
-                android:columnCount="3">
 
-
-                <!--item_1-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:layout_gravity="center"
-                    app:cardElevation="7dp"
-                    android:layout_margin="10dp"
-                    app:cardCornerRadius="10dp">
-                    <!--item_1-->
-                    <LinearLayout
-                        android:id="@+id/btImageDes"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp"
-                        >
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/mota_hinhanh_icon"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Mô tả hình ảnh"
-                            android:gravity="center"
-                            android:paddingTop="10dp"/>
-                    </LinearLayout>
-                    <!-- end_item_1-->
-
-                </androidx.cardview.widget.CardView>
-                <!-- end_item_1-->
-                <!--item_2-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:layout_gravity="center"
-                    app:cardElevation="7dp"
-                    app:cardCornerRadius="10dp"
-                    android:layout_margin="10dp"  >
-
-                    <LinearLayout
-                        android:id="@+id/btAskAndAnswer"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/hoi_dap_icon"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Hỏi &amp; Đáp"
-                            android:gravity="center"
-                            android:paddingTop="10dp"/>
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-                <!-- end_item_2-->
-                <!--item_3-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:layout_gravity="center"
-                    app:cardElevation="7dp"
-                    app:cardCornerRadius="10dp"
-                    android:layout_margin="10dp" >
-
-                    <LinearLayout
-                        android:id="@+id/btConversation"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:src="@drawable/nghe_hieu_icon"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Đoạn hội thoại"
-                            android:gravity="center"
-                            android:paddingTop="10dp"/>
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-                <!-- end_item_3-->
-
-            </GridLayout>
-
-
-        </RelativeLayout>
-
-        <!-- end content_1-->
 
 
         <!--content_2-->
@@ -153,16 +33,16 @@
                 android:id="@+id/ReadingTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Đọc hiểu"
+                android:text="Luyện tập"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
 
 
-            <GridLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ReadingTitle"
-                android:columnCount="3">
+                android:gravity="center">
 
                 <!--item_1-->
                 <androidx.cardview.widget.CardView
@@ -253,7 +133,7 @@
                 </androidx.cardview.widget.CardView>
                 <!-- end_item_3-->
 
-            </GridLayout>
+            </LinearLayout>
 
 
         </RelativeLayout>
@@ -273,11 +153,11 @@
                 android:textStyle="bold"/>
 
 
-            <GridLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/PracticeTitle"
-                android:columnCount="3">
+                android:gravity="center">
 
                 <!--item_1-->
                 <androidx.cardview.widget.CardView
@@ -367,7 +247,7 @@
                 </androidx.cardview.widget.CardView>
                 <!-- end_item_3-->
 
-            </GridLayout>
+            </LinearLayout>
 
 
         </RelativeLayout>

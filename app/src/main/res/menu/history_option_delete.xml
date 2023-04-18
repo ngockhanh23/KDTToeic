@@ -5,7 +5,7 @@
         android:id="@+id/mnBackupDataHistory"
         android:title="Sao luu"
         app:showAsAction="always"
-        android:icon="@drawable/ic_baseline_backup_24" />
+        android:icon="@drawable/baseline_backup_24" />
 
     <item
         android:id="@+id/mnClearAllHistory"

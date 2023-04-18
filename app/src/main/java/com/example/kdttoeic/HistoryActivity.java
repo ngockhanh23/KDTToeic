@@ -42,6 +42,7 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
     KDTToeicDB kdtToeicDB;
     FirebaseFirestore db;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
