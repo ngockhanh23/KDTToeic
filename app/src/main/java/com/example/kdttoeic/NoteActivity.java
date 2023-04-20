@@ -31,6 +31,8 @@ public class NoteActivity extends AppCompatActivity implements NoteAdapter.Liste
     NoteAdapter noteAdapter;
     KDTToeicDB kdtToeicDB;
     int index;
+    //Cách 1
+    //Đối tượng vừa gửi dữ liệu đi và vừa nhận dữ liệu về
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
@@ -67,7 +69,6 @@ public class NoteActivity extends AppCompatActivity implements NoteAdapter.Liste
             Intent intent = new Intent(NoteActivity.this, NoteAddActivity.class);
             launcher.launch(intent);
         }
-        //Thoát trang
         if (item.getItemId() == android.R.id.home) {
             finish();
         }
@@ -85,11 +86,11 @@ public class NoteActivity extends AppCompatActivity implements NoteAdapter.Liste
 
         noteAdapter = new NoteAdapter(notes, this);
         rvNotes.setAdapter(noteAdapter);
-        rvNotes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
+        rvNotes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rvNotes.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         getSupportActionBar().setTitle("Ghi chú");
-        //Hiện dấu mũi tên quay về
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

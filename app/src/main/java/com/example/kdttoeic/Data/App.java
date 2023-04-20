@@ -11,7 +11,6 @@ public class App extends Application {
     KDTToeicDB kdtToeicDB;
     String filename = "config";
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     boolean nightMode;
 
     @Override
@@ -21,14 +20,13 @@ public class App extends Application {
         kdtToeicDB.copyDatabase();
 
         sharedPreferences = getSharedPreferences(filename, Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
         nightMode = sharedPreferences.getBoolean("night", false);
         if (nightMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-        editor.commit();
+
     }
 
 }

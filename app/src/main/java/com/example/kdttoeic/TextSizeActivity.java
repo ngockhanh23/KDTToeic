@@ -76,7 +76,6 @@ public class TextSizeActivity extends AppCompatActivity {
         rbOpB.setTextSize(textsize);
         rbOpC.setTextSize(textsize);
         rbOpD.setTextSize(textsize);
-
     }
 
     private void AnhXa() {

@@ -10,19 +10,16 @@ import android.widget.TextView;
 import com.example.kdttoeic.model.Word;
 
 public class WordDetailActivitty extends AppCompatActivity {
-
-    ImageView imDescribe;
     TextView tvEn, tvSpell, tvVe, tvEx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_detail_activitty);
+        setContentView(R.layout.activity_word_detail);
 
         Intent i = getIntent();
         Word word = (Word) i.getSerializableExtra("word");
 
-        imDescribe = findViewById(R.id.imDescribe);
         tvEn = findViewById(R.id.tvEn);
         tvSpell = findViewById(R.id.tvSpell);
         tvVe = findViewById(R.id.tvVe);

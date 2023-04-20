@@ -39,14 +39,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteVH> {
             String title = note.getTitle().substring(0, 10);
             holder.tvTitle.setText(title + "...");
         } else {
-            holder.tvTitle.setText(note.getContent());
+            holder.tvTitle.setText(note.getTitle());
         }
 
         if (note.getContent().length() > 30) {
             String content = note.getContent().substring(0, 30);
             holder.tvContent.setText(content + "...");
         } else {
-            holder.tvContent.setText(note.getTitle());
+            holder.tvContent.setText(note.getContent());
         }
 
         holder.ivEdit.setOnClickListener(new View.OnClickListener() {

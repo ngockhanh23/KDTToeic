@@ -29,7 +29,7 @@ public class KDTToeicDB {
         this.context = context;
     }
 
-    //code first
+    //data first
     //Hàm này sinh ra CSDL
     public SQLiteDatabase openDB() {
         return context.openOrCreateDatabase(dbName, Context.MODE_PRIVATE, null);
@@ -76,6 +76,51 @@ public class KDTToeicDB {
         return tmp;
     }
 
+    //lấy từ vựng theo loại
+    public ArrayList<Word> getVocabCat(int i) {
+        ArrayList<Word> tmp = new ArrayList<>();
+        String sql = "SELECT * FROM tblVocabulary WHERE vocabCat=" + i;
+        db = openDB();
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String en = cursor.getString(1);
+            String ve = cursor.getString(2);
+            String spell = cursor.getString(3);
+            int love = cursor.getInt(4);
+            String example = cursor.getString(5);
+            String image = cursor.getString(6);
+            int vocabCat = cursor.getInt(7);
+            Word word = new Word(id, en, ve, spell, love, example, image, vocabCat);
+            tmp.add(word);
+        }
+        return tmp;
+    }
+
+    // Cập nhật từ vựng đã sort
+    public void SortVocab(ArrayList<Word> word) {
+        db = openDB();
+        ContentValues cv = new ContentValues();
+        for (Word word1 : word) {
+            cv.put("EN", word1.getEn());
+            cv.put("VE", word1.getVe());
+            cv.put("SPELL", word1.getSpell());
+            cv.put("LOVE", word1.getLove());
+            cv.put("EXAMPLE", word1.getExample());
+            cv.put("IMAGE", word1.getImage());
+            cv.put("VOCABCAT", word1.getVocabCat());
+            db.insert("tblVocabulary", null, cv);
+        }
+        db.close();
+    }
+
+    // Xóa từ vựng
+    public void deleteVocab() {
+        db = openDB();
+        db.delete("tblVocabulary", "", null);
+        db.close();
+    }
+
     //lấy câu hỏi
     public ArrayList<Question> getQuestion() {
         ArrayList<Question> tmp = new ArrayList<>();
@@ -101,7 +146,32 @@ public class KDTToeicDB {
         return tmp;
     }
 
-    public Question getQuestionItem(int idQuestion){
+    //lấy câu hỏi có tham só
+    public ArrayList<Question> getQuestion(int questionCate) {
+        ArrayList<Question> tmp = new ArrayList<>();
+        String sql = "SELECT * FROM tblQuestion where QUESTIONCAT =" + questionCate;
+        db = openDB();
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String content = cursor.getString(1);
+            String image = cursor.getString(2);
+            String audio = cursor.getString(3);
+            String opA = cursor.getString(4);
+            String opB = cursor.getString(5);
+            String opC = cursor.getString(6);
+            String opD = cursor.getString(7);
+            int asnwer = cursor.getInt(8);
+            int level = cursor.getInt(9);
+            int love = cursor.getInt(10);
+            int questionCat = cursor.getInt(11);
+            Question question = new Question(id, content, image, audio, opA, opB, opC, opD, asnwer, level, love, questionCat);
+            tmp.add(question);
+        }
+        return tmp;
+    }
+
+    public Question getQuestionItem(int idQuestion) {
 
 
         String sql = "SELECT * FROM tblQuestion";
@@ -121,7 +191,7 @@ public class KDTToeicDB {
             int love = cursor.getInt(10);
             int questionCat = cursor.getInt(11);
 
-            if(id == idQuestion){
+            if (id == idQuestion) {
                 Question question = new Question(id, content, image, audio, opA, opB, opC, opD, asnwer, level, love, questionCat);
                 db.close();
                 return question;
@@ -132,7 +202,6 @@ public class KDTToeicDB {
 
         return null;
     }
-
     //lấy ghi chú
     public ArrayList<Note> getNote() {
         ArrayList<Note> tmp = new ArrayList<>();
@@ -178,18 +247,18 @@ public class KDTToeicDB {
     }
 
     //Lấy lịch sử làm bài
-    public ArrayList<History> getHistory(){
+    public ArrayList<History> getHistory() {
         ArrayList<History> lstTemp = new ArrayList<>();
         String sql = "SELECT * FROM tblHistory";
         db = openDB();
         Cursor cursor = db.rawQuery(sql, null);
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
             String topic = cursor.getString(1);
             int amountQuestion = cursor.getInt(2);
             int maxAmountQuestion = cursor.getInt(3);
             float score = cursor.getFloat(4);
-            History history = new History(id,topic,amountQuestion, maxAmountQuestion, score);
+            History history = new History(id, topic, amountQuestion, maxAmountQuestion, score);
             lstTemp.add(history);
         }
         db.close();
@@ -197,7 +266,7 @@ public class KDTToeicDB {
     }
 
     //Thêm lịch sử làm bài
-    public void insertHistory(String topic, int amountQuestion, int maxAmountQuestion, float score){
+    public void insertHistory(String topic, int amountQuestion, int maxAmountQuestion, float score) {
         db = openDB();
         ContentValues cv = new ContentValues();
         cv.put("TOPIC", topic);
@@ -211,7 +280,7 @@ public class KDTToeicDB {
 
 
     //Cập nhật lịch sử
-    public void updateHistory(int id, int amountQuestion,int maxAmountQuestion, float score) {
+    public void updateHistory(int id, int amountQuestion, int maxAmountQuestion, float score) {
         db = openDB();
         ContentValues cv = new ContentValues();
         cv.put("AMOUNT_QUESTION", amountQuestion);
@@ -236,20 +305,19 @@ public class KDTToeicDB {
     }
 
     //Lấy object lịch sử mới nhất
-
-    public History lastHistory(){
+    public History lastHistory() {
 
 
         String sql = "SELECT * FROM tblHistory";
         db = openDB();
         Cursor cursor = db.rawQuery(sql, null);
-        while (cursor.moveToLast()){
+        while (cursor.moveToLast()) {
             int id = cursor.getInt(0);
             String topic = cursor.getString(1);
             int amountQuestion = cursor.getInt(2);
             int maxAmountQuestion = cursor.getInt(3);
             float score = cursor.getFloat(4);
-            return new History(id,topic,amountQuestion, maxAmountQuestion, score);
+            return new History(id, topic, amountQuestion, maxAmountQuestion, score);
         }
         db.close();
         return null;
@@ -257,7 +325,7 @@ public class KDTToeicDB {
 
 
     //Lấy số lượng lịch sử bài làm
-    public int countHistory(){
+    public int countHistory() {
         String sql = "SELECT * FROM tblHistory";
         db = openDB();
         Cursor cursor = db.rawQuery(sql, null);
@@ -265,41 +333,29 @@ public class KDTToeicDB {
     }
 
     //Load danh sách đáp án theo lịch sử kiểm tra
-    public ArrayList<HistoryDetails> getAnswerList(int idHistory){
+    public ArrayList<HistoryDetails> getAnswerList(int idHistory) {
         ArrayList<HistoryDetails> lstAnswer = new ArrayList<>();
-//
-        String sql = "SELECT * FROM tblHistoryDetails where ID_HISTORY ="+idHistory;
+//        String sql = "SELECT * FROM tblHistoryDetails WHELE ID_HISTORY = " + String.valueOf(idHistory)  ;
+//        String sql = "SELECT * FROM tblHistoryDetails" ;
+        String sql = "SELECT * FROM tblHistoryDetails where ID_HISTORY =" + idHistory;
 
         db = openDB();
-        Cursor cursor = db.rawQuery(sql,null);
-        while (cursor.moveToNext()){
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
             int id = cursor.getInt(0);
             int id_History = cursor.getInt(1);
             int selectOptionUser = cursor.getInt(2);
             int correctAnswer = cursor.getInt(3);
             int idQuestion = cursor.getInt(4);
-            HistoryDetails historyDetails = new HistoryDetails(id,id_History,selectOptionUser, correctAnswer, idQuestion);
+            HistoryDetails historyDetails = new HistoryDetails(id, id_History, selectOptionUser, correctAnswer, idQuestion);
             lstAnswer.add(historyDetails);
         }
         db.close();
         return lstAnswer;
     }
 
-
-
-
-
-
-    //Lấy số lượng lịch sử bài làm
-    public int countHistoryDetail( int idHistory){
-        String sql = "SELECT * FROM tblHistoryDetails where ID_HISTORY ="+idHistory;
-        db = openDB();
-        Cursor cursor = db.rawQuery(sql, null);
-        return cursor.getCount();
-    }
-
     //Thêm chi tiết đáp án
-    public void insertHistoryDetails(int idHistory, int selectOptionUser, int correctAnswer, int idQuestion){
+    public void insertHistoryDetails(int idHistory, int selectOptionUser, int correctAnswer, int idQuestion) {
         db = openDB();
         ContentValues cv = new ContentValues();
         cv.put("ID_HISTORY", idHistory);
@@ -308,24 +364,6 @@ public class KDTToeicDB {
         cv.put("ID_QUESTION", idQuestion);
         db.insert("tblHistoryDetails", null, cv);
         db.close();
-    }
-
-    //Lấy chi tiết đáp án mới nhất theo id lịch sử
-    public HistoryDetails lastHistoryDetails(int idHistory){
-        String sql = "SELECT * FROM tblHistoryDetails where ID_HISTORY ="+idHistory;
-        db = openDB();
-        Cursor cursor = db.rawQuery(sql,null);
-        while (cursor.moveToLast()){
-            int id = cursor.getInt(0);
-            int id_History = cursor.getInt(1);
-            int selectOptionUser = cursor.getInt(2);
-            int correctAnswer = cursor.getInt(3);
-            int idQuestion = cursor.getInt(4);
-            HistoryDetails lastHistoryDetails = new HistoryDetails(id,id_History,selectOptionUser, correctAnswer, idQuestion);
-            return lastHistoryDetails;
-        }
-        db.close();
-        return null;
     }
 
     //Xóa chi tiết đáp án
@@ -342,4 +380,6 @@ public class KDTToeicDB {
         db.delete("tblHistoryDetails", "", null);
         db.close();
     }
+
+
 }

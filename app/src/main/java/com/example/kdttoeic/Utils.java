@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Utils {
-    public static Bitmap convertToBitmapFromAssets(Context context, String imageName){
+    public static Bitmap convertToBitmapFromAssets(Context context, String imageName) {
         AssetManager assetManager = context.getAssets();
         try {
-            InputStream inputStream = assetManager.open("images/"+imageName);
+            InputStream inputStream = assetManager.open("images/" + imageName);
             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
             return bitmap;
         } catch (IOException e) {

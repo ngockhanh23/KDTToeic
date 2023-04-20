@@ -1,13 +1,11 @@
 package fragment;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,12 +20,12 @@ import android.view.ViewGroup;
 
 import com.example.kdttoeic.Data.KDTToeicDB;
 import com.example.kdttoeic.R;
+import com.example.kdttoeic.SearchActivity;
 import com.example.kdttoeic.WordDetailActivitty;
 import com.example.kdttoeic.adapter.WordAdapter;
 import com.example.kdttoeic.model.Word;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -41,9 +39,12 @@ public class SearchFragment extends Fragment implements WordAdapter.Listener {
     RecyclerView rvSearch;
     ArrayList<Word> arrayList;
     WordAdapter wordAdapter;
-    SearchView searchView;
     KDTToeicDB kdtToeicDB;
 
+    String filename = "config";
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    int typeSort;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -84,7 +85,6 @@ public class SearchFragment extends Fragment implements WordAdapter.Listener {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         setHasOptionsMenu(true);
-
     }
 
     @Override
@@ -92,8 +92,6 @@ public class SearchFragment extends Fragment implements WordAdapter.Listener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
-
-
     }
 
     @Override
@@ -116,37 +114,35 @@ public class SearchFragment extends Fragment implements WordAdapter.Listener {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.search_menu, menu);
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        searchView = (SearchView) menu.findItem(R.id.mnSearch).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                wordAdapter.getFilter().filter(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                wordAdapter.getFilter().filter(newText);
-//                if (newText.isEmpty()) {
-//                    rvSearch.setVisibility(View.VISIBLE);
-//                } else {
-//                    rvSearch.setVisibility(View.INVISIBLE);
-//                }
-                return false;
-            }
-        });
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.mnSort) {
-            Collections.sort(arrayList);
+            if (typeSort == 1) {
+                typeSort = 2;
+                Collections.sort(arrayList, new Comparator<Word>() {
+                    @Override
+                    public int compare(Word o1, Word o2) {
+                        return o1.compareTo(o2);
+                    }
+                });
+            } else {
+                typeSort = 1;
+                Collections.sort(arrayList, new Comparator<Word>() {
+                    @Override
+                    public int compare(Word o1, Word o2) {
+                        return o2.compareTo(o1);
+                    }
+                });
+            }
             wordAdapter.notifyDataSetChanged();
-
+            kdtToeicDB.deleteVocab();
+            kdtToeicDB.SortVocab(arrayList);
+        }
+        if (item.getItemId() == R.id.mnSearch) {
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

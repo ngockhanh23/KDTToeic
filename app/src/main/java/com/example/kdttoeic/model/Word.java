@@ -1,5 +1,11 @@
 package com.example.kdttoeic.model;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+
+import com.example.kdttoeic.R;
+
 import java.io.Serializable;
 
 public class Word implements Serializable, Comparable<Word> {

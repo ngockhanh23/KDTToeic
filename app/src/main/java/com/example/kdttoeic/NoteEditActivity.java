@@ -37,6 +37,7 @@ public class NoteEditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Note note1 = new Note(note.getId(), etTitle.getText().toString(),
                         etContent.getText().toString());
+                //Gửi intent vào trong hệ thống tk nào đang nhận dữ liệu thì chụp lấy nó mà nhận
                 Intent intent1 = getIntent();
                 intent1.putExtra("note", note1);
                 setResult(2003, intent1);

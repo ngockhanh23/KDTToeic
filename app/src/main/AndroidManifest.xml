@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-
     <application
         android:name=".Data.App"
         android:allowBackup="true"
@@ -15,9 +13,15 @@
         android:theme="@style/Theme.KDTToeic"
         tools:targetApi="31">
         <activity
+            android:name=".SearchActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".HistoryDetailsActivity"
             android:exported="false" />
-
         <activity
             android:name=".HistoryActivity"
             android:exported="false" />
@@ -60,25 +64,10 @@
             android:name=".PracticeActivity"
             android:exported="false" />
         <activity
-            android:name=".TestActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TestDesPageActivity"
-            android:exported="false" />
-        <activity
             android:name=".ResultTestActivity"
             android:exported="false" />
         <activity
             android:name=".PracticeDesPageActivity"
-            android:exported="false" />
-        <activity
-            android:name=".VocabCatActivity"
-            android:exported="false" />
-        <activity
-            android:name=".WordVocabCatActivity"
-            android:exported="false" />
-        <activity
-            android:name=".WordDetailActivitty"
             android:exported="false" />
         <activity
             android:name=".WaitingScreenActivity"
@@ -93,18 +82,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".DetailsAnswerActivity"
             android:exported="false" />
-
         <activity
             android:name=".TextSizeActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-    </application>
+        <activity
+            android:name=".TestDesPageActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TestActivity"
+            android:exported="true" />
+        <activity
+            android:name=".WordVocabCatActivity"
+            android:exported="true" />
+        <activity
+            android:name=".WordDetailActivitty"
+            android:exported="true" />
+        <activity
+            android:name=".VocabCatActivity"
+            android:exported="true" />
 
+    </application>
 
 </manifest>

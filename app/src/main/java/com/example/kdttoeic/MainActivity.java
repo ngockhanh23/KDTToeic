@@ -67,14 +67,11 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-
     void loadFragment(Fragment fmNew) {
         //Gọi quản lí Fragment để tiến hành thay đổi Fragment
         FragmentTransaction fmCur = getSupportFragmentManager().beginTransaction();
         //Thay thế Fragment hiện tại = Fragment mới vào id.container là Framelayout cu của màn hình hiện Fragment
         fmCur.replace(R.id.container, fmNew);
-        //Đưa Fragment mới thay đổi thày Fragment chính
-        fmCur.addToBackStack(null);
         //Thực hiện việc chuyển đổi
         fmCur.commit();
     }

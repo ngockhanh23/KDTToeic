@@ -27,18 +27,20 @@ public class VocabCatActivity extends AppCompatActivity implements VocabCatAdapt
         rvVocabcats = findViewById(R.id.rvVocabcats);
 
         vocabCats = new ArrayList<>();
-        VocabCat vocabCat = new VocabCat(1, "TRAFFIC");
+        VocabCat vocabCat = new VocabCat(1, "In the city");
         vocabCats.add(vocabCat);
-        vocabCat = new VocabCat(2, "INFORMATION");
+        vocabCat = new VocabCat(2, "Transportation 1");
         vocabCats.add(vocabCat);
-        vocabCat = new VocabCat(3, "LIFE");
+        vocabCat = new VocabCat(3, "Transportation 2");
         vocabCats.add(vocabCat);
-        vocabCat = new VocabCat(4, "SOCIETY");
+        vocabCat = new VocabCat(4, "Transportation 3");
+        vocabCats.add(vocabCat);
+        vocabCat = new VocabCat(5, "Society");
         vocabCats.add(vocabCat);
 
         vocabCatAdapter = new VocabCatAdapter(vocabCats, this);
         rvVocabcats.setAdapter(vocabCatAdapter);
-        rvVocabcats.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+        rvVocabcats.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rvVocabcats.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 

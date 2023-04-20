@@ -32,9 +32,9 @@ public class NoteAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (etTitle.length() == 0 || etContent.length() == 0) {
-                    Toast.makeText(NoteAddActivity.this, "Điền đầy đủ thông tin đi tk cc", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NoteAddActivity.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else {
-                    Note note = new Note(5, etTitle.getText().toString()
+                    Note note = new Note( etTitle.getText().toString()
                             , etContent.getText().toString());
                     Intent intent = getIntent();
                     intent.putExtra("note", note);

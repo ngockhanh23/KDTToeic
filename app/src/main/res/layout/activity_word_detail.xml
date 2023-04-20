@@ -9,13 +9,6 @@
     tools:context=".WordDetailActivitty"
     android:padding="20dp">
 
-    <ImageView
-        android:id="@+id/imDescribe"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/reading_1_icon" />
-
     <TextView
         android:id="@+id/tvEn"
         android:layout_width="wrap_content"
