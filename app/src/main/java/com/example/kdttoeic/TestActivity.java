@@ -39,7 +39,6 @@ public class TestActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     String filename = "config";
     int textsize;
-    FirebaseFirestore db;
 
     KDTToeicDB kdtToeicDB;
 
@@ -61,7 +60,6 @@ public class TestActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         kdtToeicDB = new KDTToeicDB(TestActivity.this);
-        db = FirebaseFirestore.getInstance();
 
         AnhXa();
         AddQuestion();
@@ -132,13 +130,13 @@ public class TestActivity extends AppCompatActivity {
                     kdtToeicDB.updateHistory(lastHistory.getId(), countCorrectAnswer, maxAmountQuestion, score);
 
                     // Dua du lieu len firestore
-                    db.collection("Thi thu").document("" + lastHistory.getId())
-                                    .set(kdtToeicDB.getHistory().get(kdtToeicDB.countHistory() - 1), SetOptions.merge());
-
-                    for(int i = 0; i < lstHitoryDetails.size(); i++)
-                    {
-                        db.collection("Chi tiet bai thi").add(lstHitoryDetails.get(i));
-                    }
+//                    db.collection("Thi thu").document("" + lastHistory.getId())
+//                                    .set(kdtToeicDB.getHistory().get(kdtToeicDB.countHistory() - 1), SetOptions.merge());
+//
+//                    for(int i = 0; i < lstHitoryDetails.size(); i++)
+//                    {
+//                        db.collection("Chi tiet bai thi").add(lstHitoryDetails.get(i));
+//                    }
 
                     startActivity(intent);
                     finish();

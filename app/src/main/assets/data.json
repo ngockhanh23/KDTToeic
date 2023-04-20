@@ -1,0 +1,11 @@
+{
+  "history": [
+    {
+      "id": 1,
+      "topic": "Test 1",
+      "amountQuestion": 2,
+      "maxAmountQuestion": 5,
+      "Score": 4.0
+    }
+  ]
+}

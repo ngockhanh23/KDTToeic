@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-
     void loadFragment(Fragment fmNew) {
         //Gọi quản lí Fragment để tiến hành thay đổi Fragment
         FragmentTransaction fmCur = getSupportFragmentManager().beginTransaction();
@@ -78,6 +77,5 @@ public class MainActivity extends AppCompatActivity {
         //Thực hiện việc chuyển đổi
         fmCur.commit();
     }
-
 
 }

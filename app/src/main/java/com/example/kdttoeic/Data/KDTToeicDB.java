@@ -266,9 +266,6 @@ public class KDTToeicDB {
     }
 
 
-
-
-
     //Lấy số lượng lịch sử bài làm
     public int countHistoryDetail( int idHistory){
         String sql = "SELECT * FROM tblHistoryDetails where ID_HISTORY ="+idHistory;
