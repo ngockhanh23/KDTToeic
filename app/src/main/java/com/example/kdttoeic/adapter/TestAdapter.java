@@ -45,7 +45,6 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder
             return;
         }
 
-
         holder.testTitle.setText(test.getTitle());
         holder.testDes.setText(test.getDescription());
         holder.testBtn.setOnClickListener(v -> listener.OnOpenExam(test.getMucde()));

@@ -76,5 +76,4 @@ public class MainActivity extends AppCompatActivity {
         fmCur.commit();
     }
 
-
 }

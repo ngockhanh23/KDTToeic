@@ -1,13 +1,28 @@
 package com.example.kdttoeic.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+import javax.annotation.Generated;
+
+@Generated("jsonschema2pojo")
 public class History {
 
-    int id;
-    String topic;
-    int amountQuestion;
-    int maxAmountQuestion;
-    float Score;
+    @SerializedName("id")
+    @Expose
+    private int id;
+    @SerializedName("topic")
+    @Expose
+    private String topic;
+    @SerializedName("amountQuestion")
+    @Expose
+    private int amountQuestion;
+    @SerializedName("maxAmountQuestion")
+    @Expose
+    private int maxAmountQuestion;
+    @SerializedName("score")
+    @Expose
+    private float Score;
 
     public History(int id, String topic, int amountQuestion, int maxAmountQuestion, float score) {
         this.id = id;

@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "92391810809",
-    "project_id": "darkmode-598d1",
-    "storage_bucket": "darkmode-598d1.appspot.com"
+    "project_number": "26277805171",
+    "project_id": "kdttoeic",
+    "storage_bucket": "kdttoeic.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:92391810809:android:06e5d115c04a7f9f88e428",
+        "mobilesdk_app_id": "1:26277805171:android:1d975fa4d8d53b0db07e06",
         "android_client_info": {
           "package_name": "com.example.kdttoeic"
         }
       },
       "oauth_client": [
         {
-          "client_id": "92391810809-0qv620mtuel3nu0vmodk63sh26c797g6.apps.googleusercontent.com",
+          "client_id": "26277805171-et8k085volcl7hi2ka5na3ier9pd4sur.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyALDscR7XjvfUdZtHb_DOT__nyUA1tcQe8"
+          "current_key": "AIzaSyAuUUn7rChj8IoZAyrDs93h8BnCIswEvJ8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "92391810809-0qv620mtuel3nu0vmodk63sh26c797g6.apps.googleusercontent.com",
+              "client_id": "26277805171-et8k085volcl7hi2ka5na3ier9pd4sur.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
