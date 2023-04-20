@@ -60,7 +60,7 @@ public class PracticeActivity extends AppCompatActivity {
 
         correctAnswer = lstQuestion.get(0).getAnswer();
 
-        History lastHistory = kdtToeicDB.getHistory().get(kdtToeicDB.countHistory()-1);
+        History lastHistory = kdtToeicDB.lastHistory();
 
         //Bắt sự kiện người dùng chọn đáp án
         rgOptionsQuestion.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -112,7 +112,6 @@ public class PracticeActivity extends AppCompatActivity {
                     //Cập nhật lịch sử
                     kdtToeicDB.updateHistory(lastHistory.getId(),countCorrectAnswer,maxAmountQuestion,score);
 
-
                     startActivity(intent);
                     finish();
                 }
@@ -121,7 +120,7 @@ public class PracticeActivity extends AppCompatActivity {
 
                else{
 //                  thêm lịch sử đáp án
-                    if(count ==1){
+                    if(count == 1){
                         kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(0).getId());
                     }
                     else {

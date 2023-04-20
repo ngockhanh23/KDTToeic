@@ -78,7 +78,7 @@ public class TestActivity extends AppCompatActivity {
         correctAnswer = lstQuestion.get(0).getAnswer();
 
         // Lich su bai thi moi nhat
-        History lastHistory = kdtToeicDB.getHistory().get(kdtToeicDB.countHistory() - 1);
+        History lastHistory = kdtToeicDB.lastHistory();
         lstHitoryDetails = new ArrayList<>();
 
         tesOptionsQuestion.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -117,7 +117,8 @@ public class TestActivity extends AppCompatActivity {
                 {
                     kdtToeicDB.insertHistoryDetails(lastHistory.getId(), optionUser, correctAnswer, lstQuestion.get(count-1).getId());
 
-                    HistoryDetails lastHistoryDetails = kdtToeicDB.getAnswerList(lastHistory.getId()).get(kdtToeicDB.countHistoryDetail(lastHistory.getId())-1);
+//                    HistoryDetails lastHistoryDetails = kdtToeicDB.getAnswerList(lastHistory.getId()).get(kdtToeicDB.countHistoryDetail(lastHistory.getId())-1);
+                    HistoryDetails lastHistoryDetails = kdtToeicDB.lastHistoryDetails(lastHistory.getId());
                     lstHitoryDetails.add(lastHistoryDetails);
 
                     Intent intent = new Intent(TestActivity.this, ResultTestActivity.class);

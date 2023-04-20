@@ -120,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:cursorVisible="true"
-        android:drawableLeft="@drawable/ic_baseline_backup_24"
+
         android:drawablePadding="40dp"
         android:paddingLeft="30dp"
         android:text="Phục hồi dữ liệu"

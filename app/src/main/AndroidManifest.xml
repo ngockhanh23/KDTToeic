@@ -32,7 +32,7 @@
             android:name=".NoteEditActivity"
             android:exported="false">
             <meta-data
-                android:name="android.app.lib_name"
+                android:name="android.app.li*-b_name"
                 android:value="" />
         </activity>
         <activity
@@ -60,10 +60,25 @@
             android:name=".PracticeActivity"
             android:exported="false" />
         <activity
+            android:name=".TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TestDesPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".ResultTestActivity"
             android:exported="false" />
         <activity
             android:name=".PracticeDesPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VocabCatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WordVocabCatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WordDetailActivitty"
             android:exported="false" />
         <activity
             android:name=".WaitingScreenActivity"
@@ -75,26 +90,17 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestDesPageActivity"
-            android:exported="false"/>
-        <activity android:name=".TestActivity"
-            android:exported="false"/>
 
-        <activity android:name=".VocabCatActivity"
-            android:exported="false"/>
-        <activity android:name=".WordDetailActivitty"
-            android:exported="false"/>
-        <activity android:name=".WordVocabCatActivity"
-            android:exported="false"/>
+        <activity
+            android:name=".DetailsAnswerActivity"
+            android:exported="false" />
 
-        <activity android:name=".DetailsAnswerActivity"
-            android:exported="false"/>
         <activity
             android:name=".TextSizeActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />

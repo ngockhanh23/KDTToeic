@@ -4,22 +4,28 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.kdttoeic.NoteActivity;
-import com.example.kdttoeic.PracFillSentenceActivity;
+
 import com.example.kdttoeic.PracticeDesPageActivity;
 import com.example.kdttoeic.R;
+
+
 import com.example.kdttoeic.VocabCatActivity;
 
 
 public class HomeFragment extends Fragment {
 
-    LinearLayout btImageDes, btAskAndAnswer, btConversation, btFillSentence,btFillParagraph, btReadAndUndersand, btTakeNote, btTest,btVocabulary;
+    LinearLayout  btFillSentence,btFillParagraph, btReadAndUndersand, btTakeNote, btTest,btVocabulary;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +37,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         //ánh xạ
-        btImageDes = view.findViewById(R.id.btImageDes);
-        btAskAndAnswer = view.findViewById(R.id.btAskAndAnswer);
-        btConversation = view.findViewById(R.id.btConversation);
+
         btFillSentence = view.findViewById(R.id.btFillSentence);
         btFillParagraph = view.findViewById(R.id.btFillParagraph);
         btReadAndUndersand = view.findViewById(R.id.btReadAndUndersand);
@@ -42,9 +46,7 @@ public class HomeFragment extends Fragment {
         btVocabulary = view.findViewById(R.id.btVocabulary);
 
 
-        btImageDes.setOnClickListener(onclickOption());
-        btAskAndAnswer.setOnClickListener(onclickOption());
-        btConversation.setOnClickListener(onclickOption());
+
         btFillSentence.setOnClickListener(onclickOption());
         btFillParagraph.setOnClickListener(onclickOption());
         btReadAndUndersand.setOnClickListener(onclickOption());
@@ -58,15 +60,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 switch (v.getId()){
-                    case R.id.btImageDes:
-                        openImageDes();
-                        break;
-                    case R.id.btAskAndAnswer:
-                        openAskAndAnswer();
-                        break;
-                    case R.id.btConversation:
-                        openConversation();
-                        break;
+
                     case R.id.btFillSentence:
                         openFillSentence();
                         break;
@@ -82,6 +76,7 @@ public class HomeFragment extends Fragment {
                         break;
                     case R.id.btTest:
                         openTestFragment();
+
                     case R.id.btVocabulary:
                         Intent i1 = new Intent(getActivity(), VocabCatActivity.class);
                         startActivity(i1);
@@ -91,20 +86,9 @@ public class HomeFragment extends Fragment {
         };
     }
 
-    private void openImageDes(){
-        Intent intent = new Intent(getActivity(),PracticeDesPageActivity.class);
-        startActivity(intent);
-    }
-    private void openAskAndAnswer(){
-        Intent intent = new Intent(getActivity(),PracticeDesPageActivity.class);
-        startActivity(intent);
-    }
-    private void openConversation(){
-        Intent intent = new Intent(getActivity(),PracticeDesPageActivity.class);
-        startActivity(intent);
-    }
+
     private void openFillSentence(){
-        Intent intent = new Intent(getActivity(), PracFillSentenceActivity.class);
+        Intent intent = new Intent(getActivity(), PracticeDesPageActivity.class);
         startActivity(intent);
     }
     private void openFillParagraph(){
@@ -117,8 +101,25 @@ public class HomeFragment extends Fragment {
     }
 
     private void openTestFragment(){
-        Intent intent = new Intent(getActivity(), TestFragment.class);
-        startActivity(intent);
+//
+
+//        FragmentTransaction fmCur = getSupportFragmentManager().beginTransaction();
+//        //Thay thế Fragment hiện tại = Fragment mới vào id.container là Framelayout cu của màn hình hiện Fragment
+//        fmCur.replace(R.id.container, new TestFragment());
+//        //Đưa Fragment mới thay đổi thày Fragment chính
+//        fmCur.addToBackStack(null);
+//        //Thực hiện việc chuyển đổi
+//        fmCur.commit();
+
+//        TestFragment testFragment = new TestFragment();
+//        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//
+//        transaction.replace(R.id.container, testFragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
+
+
+//
     }
 
 

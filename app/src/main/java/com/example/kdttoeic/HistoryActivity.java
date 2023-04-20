@@ -74,6 +74,7 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
     FirebaseFirestore db;
     Context context;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
