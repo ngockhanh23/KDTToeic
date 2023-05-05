@@ -26,6 +26,7 @@ import com.example.kdttoeic.adapter.HistoryAdapter;
 import com.example.kdttoeic.adapter.HistoryDetailsAdapter;
 import com.example.kdttoeic.model.History;
 import com.example.kdttoeic.model.HistoryDetails;
+import com.example.kdttoeic.model.HistoryDetailsList;
 import com.example.kdttoeic.model.HistoryList;
 import com.google.android.gms.common.util.IOUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -86,47 +87,64 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
 
         LoadData();
 
-        historyAdapter = new HistoryAdapter(HistoryActivity.this,lstHistory);
+        historyAdapter = new HistoryAdapter(HistoryActivity.this, lstHistory);
 
         rvHistory.setLayoutManager(new LinearLayoutManager(HistoryActivity.this, LinearLayoutManager.VERTICAL, true));
         rvHistory.setAdapter(historyAdapter);
 
-        rvHistory.addItemDecoration(new DividerItemDecoration(HistoryActivity.this,DividerItemDecoration.VERTICAL));
+        rvHistory.addItemDecoration(new DividerItemDecoration(HistoryActivity.this, DividerItemDecoration.VERTICAL));
 
         getSupportActionBar().setTitle("Lịch sử");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        try {
-            updateDataToJson();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
-    private void updateDataToJson() throws FileNotFoundException {
+    private void updateDataToStorage() throws FileNotFoundException {
         Gson gson = new Gson();
-        String name  = gson.toJson(kdtToeicDB.getHistory());
-        File file = new File(getFilesDir(), "config.json");
-        String path = file.getPath();
+        String historyData = gson.toJson(kdtToeicDB.getHistory());
+        String historyDetailData = gson.toJson(kdtToeicDB.getAnswerList());
+
+        File historyFile = new File(getFilesDir(), "history.json");
+        File historyDetailFile = new File(getFilesDir(), "historyDetail.json");
+        String path1 = historyFile.getPath();
+        String path2 = historyDetailFile.getPath();
         try {
-            FileOutputStream fos = new FileOutputStream(file);
+            FileOutputStream fos = new FileOutputStream(path1);
             OutputStreamWriter osw = new OutputStreamWriter(fos);
             BufferedWriter bufferedWriter = new BufferedWriter(osw);
-            bufferedWriter.write(name);
+            bufferedWriter.write(historyData);
 
             bufferedWriter.close();
             osw.close();
             fos.close();
-//            Toast.makeText()
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        try {
+            FileOutputStream fos = new FileOutputStream(path2);
+            OutputStreamWriter osw = new OutputStreamWriter(fos);
+            BufferedWriter bufferedWriter = new BufferedWriter(osw);
+            bufferedWriter.write(historyDetailData);
+
+            bufferedWriter.close();
+            osw.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference jsonFileRef = storageRef.child(path);
-        InputStream stream = new FileInputStream(file);
 
-        UploadTask uploadTask = jsonFileRef.putStream(stream);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
+        StorageReference jsonHistoryRef = storageRef.child(path1);
+        StorageReference jsonHistoryDetailRef = storageRef.child(path2);
+        InputStream stream1 = new FileInputStream(historyFile);
+        InputStream stream2 = new FileInputStream(historyDetailFile);
+
+        UploadTask uploadTask1 = jsonHistoryRef.putStream(stream1);
+        UploadTask uploadTask2 = jsonHistoryDetailRef.putStream(stream2);
+
+        uploadTask2.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(HistoryActivity.this, "Upload failure", Toast.LENGTH_SHORT).show();
@@ -138,21 +156,39 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
                 Toast.makeText(HistoryActivity.this, "Upload success", Toast.LENGTH_SHORT).show();
             }
         });
+        uploadTask1.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+            }
+        });
 
     }
 
     private void updateDataFromJson() throws IOException {
 //        Keo json file tu firebase storage ve project
-        File file = new File(getFilesDir(), "config.json");
-        String path = file.getPath();
+        File historyJson = new File(getFilesDir(), "history.json");
+        File historyDetailJson = new File(getFilesDir(), "historyDetail.json");
+
+        String path1 = historyJson.getPath();
+        String path2 = historyDetailJson.getPath();
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference jsonFileRef = storageRef.child(path);
+        StorageReference jsonHistoryRef = storageRef.child(path1);
+        StorageReference jsonHistoryDetailRef = storageRef.child(path2);
 
         final long ONE_MEGABYTE = 1024 * 1024;
-        jsonFileRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+        jsonHistoryRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
+
+            }
+        });
+        jsonHistoryDetailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+
                 Toast.makeText(HistoryActivity.this, "Pull data success", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -162,23 +198,44 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
             }
         });
 
-//        Lay du lieu do len activity
-        AssetManager assetManager = getAssets();
+//        Đổ dữ liệu vào lịch sử bài làm
         try {
-            InputStream is = assetManager.open("data.json");
-            String data = convertInputStreamToString(is);
+            InputStream stream1 = new FileInputStream(historyJson);
+            InputStream stream2 = new FileInputStream(historyDetailJson);
+
+            String jsonHistoryString = "{\"history\": " + convertInputStreamToString(stream1) + " }";
+            String jsonHistoryDetailString = "{\"historyDetails\": " + convertInputStreamToString(stream2) + " }";
 
             Gson gson = new GsonBuilder().create();
-            HistoryList historyList = gson.fromJson(data, HistoryList.class);
+//            Toast.makeText(HistoryActivity.this, "" + jsonString, Toast.LENGTH_LONG).show();
+            HistoryList historyList = gson.fromJson(jsonHistoryString, HistoryList.class);
+            HistoryDetailsList historyDetailsList = gson.fromJson(jsonHistoryDetailString, HistoryDetailsList.class);
 
-            for(int i = 0; i < lstHistory.size(); i++) {
-                String topic  = lstHistory.get(i).getTopic();
-                int amountQuestion = lstHistory.get(i).getAmountQuestion();
-                int maxAmountQuestion = lstHistory.get(i).getMaxAmountQuestion();
-                float Score = lstHistory.get(i).getScore();
+            for (int i = 0; i < historyList.getHistory().size(); i++) {
+                String topic = historyList.getHistory().get(i).getTopic();
+                int idHis = historyList.getHistory().get(i).getId();
+                int amountQuestion = historyList.getHistory().get(i).getAmountQuestion();
+                int maxAmountQuestion = historyList.getHistory().get(i).getMaxAmountQuestion();
+                float Score = historyList.getHistory().get(i).getScore();
                 kdtToeicDB.insertHistory(topic, amountQuestion, maxAmountQuestion, Score);
+
+                int idLastHistory = kdtToeicDB.lastHistory().getId();
+
+                for (int j = 0; j < historyDetailsList.getHistoryDetails().size(); j++) {
+                    int idHistoryDetail = historyDetailsList.getHistoryDetails().get(j).getIdHistory();
+//
+                    if (idHistoryDetail == idHis) {
+                        int idHistory = idLastHistory;
+                        int selectedOption = historyDetailsList.getHistoryDetails().get(j).getSelectedOptionUser();
+                        int correctAnswer = historyDetailsList.getHistoryDetails().get(j).getCorrectAnswer();
+                        int idQuestion = historyDetailsList.getHistoryDetails().get(j).getIdQuestion();
+                        kdtToeicDB.insertHistoryDetails(idHistory, selectedOption, correctAnswer, idQuestion);
+                    }
+                }
             }
-            lstHistory.addAll(historyList.getHistory());
+
+            lstHistory.clear();
+            lstHistory.addAll(kdtToeicDB.getHistory());
             historyAdapter.notifyDataSetChanged();
 
         } catch (IOException e) {
@@ -195,13 +252,14 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
         return sb.toString();
     }
 
-    void LoadData(){
+    void LoadData() {
         lstHistory = kdtToeicDB.getHistory();
 //
     }
 
     @Override
     public void onItemClick(int idHistory) {
+
         Intent viewAnswer = new Intent(HistoryActivity.this, HistoryDetailsActivity.class);
         viewAnswer.putExtra("ID_HISTORY", idHistory);
         startActivity(viewAnswer);
@@ -210,7 +268,6 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.history_option_delete, menu);
         return true;
@@ -221,8 +278,9 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
 //        if(item.getItemId() == android.R.id.home){
 //            finish();
 //        }
-        switch (item.getItemId()){
-            case android.R.id.home: finish();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
             case R.id.mnDeleteItemHistory:
                 optionDeleteItemHistory();
                 break;
@@ -230,6 +288,45 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
                 optionClearAllHistory();
                 break;
             case R.id.mnBackupDataHistory:
+                optionBackupDataHistory();
+                break;
+            case R.id.mnRestoreDataHistory:
+                optionRestoreDataHistory();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    void optionBackupDataHistory() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(HistoryActivity.this);
+        builder.setTitle("Sao lưu");
+        builder.setMessage("Dữ liệu sẽ được sao lưu trên hệ thống, bạn có muốn tiếp tục?");
+        builder.setPositiveButton("Sao lưu", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    updateDataToStorage();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.show();
+        alertDialog.show();
+    }
+
+    void optionRestoreDataHistory() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(HistoryActivity.this);
+        builder.setTitle("Phục hồi");
+        builder.setMessage("Dữ liệu sẽ được phục hồi trên máy, bạn có muốn tiếp tục?");
+        builder.setPositiveButton("Phục hồi", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 try {
                     updateDataFromJson();
                 } catch (FileNotFoundException e) {
@@ -237,32 +334,19 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.show();
+        alertDialog.show();
     }
 
-//    void optionBackupDataHistory(){
-//        AlertDialog.Builder builder = new AlertDialog.Builder(HistoryActivity.this);
-//        builder.setTitle("Phục hồi dữ liệu");
-//        builder.setMessage("Dữ liệu bài làm cũ sẽ được phục hồi, bạn có muốn tiếp tục?");
-//        builder.setPositiveButton("Phục hồi", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                updateDataToJson(lstHistory);
-//            }
-//        });
-//        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//        AlertDialog alertDialog = builder.show();
-//        alertDialog.show();
-//    }
-
-    void optionClearAllHistory(){
+    void optionClearAllHistory() {
         AlertDialog.Builder builder = new AlertDialog.Builder(HistoryActivity.this);
         builder.setTitle("Xóa toàn bộ lịch sử");
         builder.setMessage("Nếu bạn xóa toàn bộ lịch sử, lịch sử làm bài của bạn sẽ bị mất toàn bộ, bạn có chắc chắn muốn xóa hay không ?");
@@ -282,7 +366,7 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
         alertDialog.show();
     }
 
-    void optionDeleteItemHistory(){
+    void optionDeleteItemHistory() {
         AlertDialog.Builder builder = new AlertDialog.Builder(HistoryActivity.this);
         builder.setTitle("Xóa lịch sử làm bài");
         builder.setMessage("Bạn có chắc chắn muốn xóa những bài làm đã chọn hay không ???");
@@ -301,6 +385,34 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
         AlertDialog alertDialog = builder.show();
         alertDialog.show();
     }
+
+
+
+    private void deleteItemHistory() {
+
+        for (int i = 0; i < rvHistory.getChildCount();i++) {
+            //Lấy trạng thái checkbox tại view của recycle view để kiểm tra
+            View view = rvHistory.getChildAt(i);
+            CheckBox cb = view.findViewById(R.id.cbHistoryItem);
+            if (cb.isChecked()) {
+                kdtToeicDB.deleteHistoryDetails(lstHistory.get(i).getId());
+                kdtToeicDB.deleteHistory(lstHistory.get(i).getId());
+                cb.setChecked(false);
+            }
+
+        }
+        lstHistory.clear();
+        lstHistory.addAll(kdtToeicDB.getHistory());
+        historyAdapter.notifyDataSetChanged();
+    }
+
+    private void clearAllHistory() {
+        kdtToeicDB.clearHistoryDetails();
+        kdtToeicDB.clearHistory();
+        lstHistory.clear();
+        historyAdapter.notifyDataSetChanged();
+    }
+}
 
 //    private void backupDataHistory() {
 //        clearAllHistory();
@@ -345,6 +457,7 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
 //                                        }
 //                                    });
 //                        }
+
 //                        lstHistory.clear();
 //                        lstHistory.addAll(kdtToeicDB.getHistory());
 //                        historyAdapter.notifyDataSetChanged();
@@ -359,28 +472,3 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
 //
 //    }
 
-    private void deleteItemHistory() {
-
-        for(int i = rvHistory.getChildCount()-1; i>=0;i--){
-            //Lấy trạng thái checkbox tại view của recycle view để kiểm tra
-            View view = rvHistory.getChildAt(i);
-            CheckBox cb = view.findViewById(R.id.cbHistoryItem);
-            if(cb.isChecked()){
-                kdtToeicDB.deleteHistoryDetails(lstHistory.get(i).getId());
-                kdtToeicDB.deleteHistory(lstHistory.get(i).getId());
-                cb.setChecked(false);
-
-            }
-            lstHistory.clear();
-            lstHistory.addAll(kdtToeicDB.getHistory());
-        }
-        historyAdapter.notifyDataSetChanged();
-    }
-
-    private void clearAllHistory() {
-        kdtToeicDB.clearHistoryDetails();
-        kdtToeicDB.clearHistory();
-        lstHistory.clear();
-        historyAdapter.notifyDataSetChanged();
-    }
-}

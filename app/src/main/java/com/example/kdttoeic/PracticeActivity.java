@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,24 +34,38 @@ public class PracticeActivity extends AppCompatActivity {
     RadioButton rbOpA, rbOpB, rbOpC, rbOpD;
     Button btNextQuestion;
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    String filename = "config";
+    int textsize;
 
     ArrayList<Question> lstQuestion;
     private int maxAmountQuestion;
+    private int cateQuestion;
     private int count = 1; //vị trí câu hỏi
     private int countCorrectAnswer = 0;  // số câu đúng
-    private int correctAnswer ;
+    private int correctAnswer;
     private int optionUser = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice);
+        Bundle bundle = getIntent().getExtras();
 
         kdtToeicDB = new KDTToeicDB(PracticeActivity.this);
+        cateQuestion = bundle.getInt("Question_category");
+
+
+
         AnhXa();
         AddQuestion();
+        sharedPreferences = getSharedPreferences(filename, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        textsize = sharedPreferences.getInt("textsize", 16);
+        changeTextSize(textsize);
 
-//        Collections.shuffle(lstQuestion);
-
+        Collections.shuffle(lstQuestion);
 
 
         tvQuestionPractice.setText(lstQuestion.get(0).getContent());
@@ -66,7 +82,7 @@ public class PracticeActivity extends AppCompatActivity {
         rgOptionsQuestion.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.rbOpA:
                         optionUser = 1;
                         break;
@@ -84,7 +100,6 @@ public class PracticeActivity extends AppCompatActivity {
         });
 
         //lấy số lượng câu hỏi
-        Bundle bundle = getIntent().getExtras();
         maxAmountQuestion = Integer.parseInt(bundle.getString("maxAmountQuestion"));
         tvMaxAmountQuestionTest.setText(String.valueOf(this.maxAmountQuestion));
 
@@ -93,24 +108,23 @@ public class PracticeActivity extends AppCompatActivity {
         btNextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(optionUser == correctAnswer){
+                if (optionUser == correctAnswer) {
                     countCorrectAnswer++;
                 }
 
 
-                if(count == maxAmountQuestion)
-                {
+                if (count == maxAmountQuestion) {
 
-                    kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(count-1).getId());
+                    kdtToeicDB.insertHistoryDetails(lastHistory.getId(), optionUser, correctAnswer, lstQuestion.get(count - 1).getId());
 
                     Intent intent = new Intent(PracticeActivity.this, ResultTestActivity.class);
                     intent.putExtra("countCorrectAnswer", countCorrectAnswer);
                     intent.putExtra("maxAmountQuestion", maxAmountQuestion);
 //                    intent.putExtra("ID_HISTORY",countHistory);
-                    float score =  (float) countCorrectAnswer / (float) maxAmountQuestion * 100;
+                    float score = (float) countCorrectAnswer / (float) maxAmountQuestion * 100;
 
                     //Cập nhật lịch sử
-                    kdtToeicDB.updateHistory(lastHistory.getId(),countCorrectAnswer,maxAmountQuestion,score);
+                    kdtToeicDB.updateHistory(lastHistory.getId(), countCorrectAnswer, maxAmountQuestion, score);
 
                     startActivity(intent);
                     finish();
@@ -118,13 +132,12 @@ public class PracticeActivity extends AppCompatActivity {
 
 //                Toast.makeText(PracticeActivity.this,optionUser,Toast.LENGTH_LONG).show();
 
-               else{
+                else {
 //                  thêm lịch sử đáp án
-                    if(count == 1){
-                        kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(0).getId());
-                    }
-                    else {
-                        kdtToeicDB.insertHistoryDetails(lastHistory.getId(),optionUser,correctAnswer,lstQuestion.get(count-1).getId());
+                    if (count == 1) {
+                        kdtToeicDB.insertHistoryDetails(lastHistory.getId(), optionUser, correctAnswer, lstQuestion.get(0).getId());
+                    } else {
+                        kdtToeicDB.insertHistoryDetails(lastHistory.getId(), optionUser, correctAnswer, lstQuestion.get(count - 1).getId());
                     }
 
 
@@ -139,8 +152,8 @@ public class PracticeActivity extends AppCompatActivity {
                     count++;
                     tvAmountQuestionTest.setText(String.valueOf(count));
 
-                    
-               }
+
+                }
 
 
             }
@@ -153,7 +166,15 @@ public class PracticeActivity extends AppCompatActivity {
 
     }
 
-    void AnhXa(){
+    private void changeTextSize(int textsize) {
+        tvQuestionPractice.setTextSize(textsize);
+        rbOpA.setTextSize(textsize);
+        rbOpB.setTextSize(textsize);
+        rbOpC.setTextSize(textsize);
+        rbOpD.setTextSize(textsize);
+    }
+
+    void AnhXa() {
         tvAmountQuestionTest = findViewById(R.id.tvAmountQuestionTest);
         tvMaxAmountQuestionTest = findViewById(R.id.tvMaxAmountQuestionTest);
         tvQuestionPractice = findViewById(R.id.tvQuestionPractice);
@@ -174,21 +195,21 @@ public class PracticeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.mnExit){
+        if (item.getItemId() == R.id.mnExit) {
             ExitButtonOption();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    void ExitButtonOption(){
+    void ExitButtonOption() {
         AlertDialog.Builder builder = new AlertDialog.Builder(PracticeActivity.this);
         builder.setTitle("Oh no !!!");
         builder.setMessage("Nếu bạn thoát, tiến độ làm bài của bạn sẽ không được lưu lại, bạn có chắc chắn muốn thoát hay không ?");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                History lastHistory = kdtToeicDB.getHistory().get(kdtToeicDB.countHistory()-1);
+                History lastHistory = kdtToeicDB.getHistory().get(kdtToeicDB.countHistory() - 1);
                 kdtToeicDB.deleteHistoryDetails(lastHistory.getId());
                 kdtToeicDB.deleteHistory(lastHistory.getId());
                 finish();
@@ -205,9 +226,10 @@ public class PracticeActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    void AddQuestion(){
+    void AddQuestion() {
 
-        lstQuestion = kdtToeicDB.getQuestion();
+
+        lstQuestion = kdtToeicDB.getQuestion(cateQuestion);
 
     }
 }

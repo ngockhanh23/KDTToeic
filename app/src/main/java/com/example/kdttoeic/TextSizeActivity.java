@@ -31,10 +31,7 @@ public class TextSizeActivity extends AppCompatActivity {
 
         AnhXa();
 
-        sharedPreferences = getSharedPreferences(filename, Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        textsize = sharedPreferences.getInt("textsize", 16);
-        changeTextSize(textsize);
+
 
         btIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +65,15 @@ public class TextSizeActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sharedPreferences = getSharedPreferences(filename, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        textsize = sharedPreferences.getInt("textsize", 16);
+        changeTextSize(textsize);
     }
 
     void changeTextSize(int textsize) {

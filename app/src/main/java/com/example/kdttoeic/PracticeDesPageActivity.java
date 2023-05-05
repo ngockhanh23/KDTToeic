@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.kdttoeic.Data.KDTToeicDB;
+import com.example.kdttoeic.model.Question;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,8 @@ public class PracticeDesPageActivity extends AppCompatActivity {
     Button btStartPractice;
     Spinner spQuestionCount;
     private String AmountQuestion;
+
+    ArrayList<Question> lstQuestion;
     KDTToeicDB kdtToeicDB;
 
 
@@ -40,10 +43,16 @@ public class PracticeDesPageActivity extends AppCompatActivity {
 
         kdtToeicDB = new KDTToeicDB(PracticeDesPageActivity.this);
         AnhXa();
+        lstQuestion = new ArrayList<>();
+
+
+        Bundle bundle = getIntent().getExtras();
+
+        lstQuestion = kdtToeicDB.getQuestion(bundle.getInt("Question_cate"));
 
         //Số câu
         ArrayList<String> AmountQuestionOption = new ArrayList<>();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= lstQuestion.size(); i++) {
             AmountQuestionOption.add(i + "");
         }
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, AmountQuestionOption);
@@ -67,10 +76,11 @@ public class PracticeDesPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //thêm lịch sử
-                kdtToeicDB.insertHistory("Luyện tập",0,Integer.parseInt(AmountQuestion), 0);
+                kdtToeicDB.insertHistory("Practice",0,Integer.parseInt(AmountQuestion), 0);
 
                 Intent intent = new Intent(PracticeDesPageActivity.this, PracticeActivity.class);
                 intent.putExtra("maxAmountQuestion", AmountQuestion);
+                intent.putExtra("Question_category", bundle.getInt("Question_cate"));
                 startActivity(intent);
                 finish();
             }

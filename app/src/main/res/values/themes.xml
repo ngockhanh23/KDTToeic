@@ -33,4 +33,7 @@
     <style name="TEXTVIEW_VOCAB">
         <item name="android:textColor">#000</item>
     </style>
+    <style name="Card_View">
+        <item name="android:background">#FFF</item>
+    </style>
 </resources>

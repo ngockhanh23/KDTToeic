@@ -5,10 +5,21 @@ public class Test {
     private String description;
     private String mucde;
 
-    public Test(String title, String description, String mucde) {
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    private int level;
+
+    public Test(String title, String description, String mucde,int level) {
         this.title = title;
         this.description = description;
         this.mucde = mucde;
+        this.level = level;
     }
 
     public String getTitle() {

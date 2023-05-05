@@ -20,7 +20,9 @@ public class App extends Application {
         kdtToeicDB.copyDatabase();
 
         sharedPreferences = getSharedPreferences(filename, Context.MODE_PRIVATE);
+
         nightMode = sharedPreferences.getBoolean("night", false);
+
         if (nightMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {

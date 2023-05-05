@@ -64,14 +64,11 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordVH> implem
     class WordFilter extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            //Keyword search trên thanh tìm kiếm
             String strSearch = constraint.toString();
             if (strSearch.isEmpty()) {
-                //Khi chưa nhập gì thì sẽ hiển thị hết
                 wordFilter = words;
             } else {
                 List<Word> word1 = new ArrayList<>();
-                //Tk nào giống key word đã truyền thì add vào
                 for (Word word : words) {
                     if (word.getEn().toLowerCase().contains(strSearch.toLowerCase())) {
                         word1.add(word);

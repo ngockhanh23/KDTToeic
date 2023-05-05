@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.kdttoeic.Data.KDTToeicDB;
 import com.example.kdttoeic.R;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,22 +38,17 @@ public class TestFragment extends Fragment implements TestAdapter.Listener {
     private RecyclerView rcvTest;
     private ArrayList<Test> myTest;
     private TestAdapter testAdapter;
-
+    KDTToeicDB kdtToeicDB;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rcvTest = view.findViewById(R.id.rcv_test);
         myTest = new ArrayList<>();
+        kdtToeicDB = new KDTToeicDB(getContext());
+        myTest = kdtToeicDB.getTest();
         testAdapter = new TestAdapter(myTest, this);
         rcvTest.setAdapter(testAdapter);
 
-        Test test1 = new Test("De thi 1", "200 cau","300 - 500");
-        Test test2 = new Test("De thi 2", "200 cau", "500 - 700");
-        Test test3 = new Test("De thi 3", "200 cau","700 - 900");
-
-        myTest.add(test1);
-        myTest.add(test2);
-        myTest.add(test3);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         rcvTest.setLayoutManager(linearLayoutManager);
@@ -68,9 +64,9 @@ public class TestFragment extends Fragment implements TestAdapter.Listener {
     }
 
     @Override
-    public void OnOpenExam(String mucde) {
+    public void OnOpenExam(int level) {
         Intent intent = new Intent(getActivity(), TestDesPageActivity.class);
-        intent.putExtra("mucde", mucde);
+        intent.putExtra("level", level);
         startActivity(intent);
     }
 }

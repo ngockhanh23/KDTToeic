@@ -16,12 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.kdttoeic.About;
 import com.example.kdttoeic.HistoryActivity;
 import com.example.kdttoeic.R;
 import com.example.kdttoeic.TextSizeActivity;
 
 public class SettingFragment extends Fragment {
-    TextView tvTextSize, btInterface, btAnswer, btHistory;
+    TextView tvTextSize, btInterface, tvAbout, btHistory;
     boolean nightMode;
     SwitchCompat switchInterFace;
 
@@ -120,6 +121,14 @@ public class SettingFragment extends Fragment {
 
             }
         });
+        //About
+        tvAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), About.class);
+                startActivity(i);
+            }
+        });
         //TEXT-SIZE
         tvTextSize.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +146,7 @@ public class SettingFragment extends Fragment {
 
     void anhxa(View view) {
         btInterface = view.findViewById(R.id.btInterface);
-        btAnswer = view.findViewById(R.id.btAnswer);
+        tvAbout = view.findViewById(R.id.tvAbout);
         btHistory = view.findViewById(R.id.btHistory);
         tvTextSize = view.findViewById(R.id.tvTextSize);
         switchInterFace = view.findViewById(R.id.switchInterFace);

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.kdttoeic.Data.KDTToeicDB;
 import com.example.kdttoeic.model.VocabCat;
 import com.example.kdttoeic.adapter.VocabCatAdapter;
 
@@ -18,6 +19,7 @@ public class VocabCatActivity extends AppCompatActivity implements VocabCatAdapt
     RecyclerView rvVocabcats;
     ArrayList<VocabCat> vocabCats;
     VocabCatAdapter vocabCatAdapter;
+    KDTToeicDB kdtToeicDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,18 +27,10 @@ public class VocabCatActivity extends AppCompatActivity implements VocabCatAdapt
         setContentView(R.layout.activity_vocab_cat);
 
         rvVocabcats = findViewById(R.id.rvVocabcats);
+        kdtToeicDB = new KDTToeicDB(this);
 
-        vocabCats = new ArrayList<>();
-        VocabCat vocabCat = new VocabCat(1, "In the city");
-        vocabCats.add(vocabCat);
-        vocabCat = new VocabCat(2, "Transportation 1");
-        vocabCats.add(vocabCat);
-        vocabCat = new VocabCat(3, "Transportation 2");
-        vocabCats.add(vocabCat);
-        vocabCat = new VocabCat(4, "Transportation 3");
-        vocabCats.add(vocabCat);
-        vocabCat = new VocabCat(5, "Society");
-        vocabCats.add(vocabCat);
+        vocabCats = kdtToeicDB.getVocabCat();
+
 
         vocabCatAdapter = new VocabCatAdapter(vocabCats, this);
         rvVocabcats.setAdapter(vocabCatAdapter);

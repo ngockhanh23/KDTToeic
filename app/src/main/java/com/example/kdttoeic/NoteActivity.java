@@ -31,8 +31,7 @@ public class NoteActivity extends AppCompatActivity implements NoteAdapter.Liste
     NoteAdapter noteAdapter;
     KDTToeicDB kdtToeicDB;
     int index;
-    //Cách 1
-    //Đối tượng vừa gửi dữ liệu đi và vừa nhận dữ liệu về
+
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {

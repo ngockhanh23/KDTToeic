@@ -17,12 +17,22 @@ public class Word implements Serializable, Comparable<Word> {
     String example;
     String image;
     int vocabCat;
+    String audio;
+
 
     public Word() {
 
     }
 
-    public Word(int id, String en, String ve, String spell, int love, String example, String image, int vocabCat) {
+    public String getAudio() {
+        return audio;
+    }
+
+    public void setAudio(String audio) {
+        this.audio = audio;
+    }
+
+    public Word(int id, String en, String ve, String spell, int love, String example, String image, int vocabCat, String audio) {
         this.id = id;
         En = en;
         Ve = ve;
@@ -31,6 +41,7 @@ public class Word implements Serializable, Comparable<Word> {
         this.example = example;
         this.image = image;
         this.vocabCat = vocabCat;
+        this.audio = audio;
     }
 
     public int getVocabCat() {

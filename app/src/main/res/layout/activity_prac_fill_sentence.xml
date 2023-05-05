@@ -8,10 +8,13 @@
     tools:context=".PracFillSentenceActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/Card_View"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/radius_background"
         android:padding="30dp">
 
         <ImageView
@@ -25,35 +28,34 @@
         <!--        Số câu đã làm-->
         <TextView
             android:id="@+id/tvDoneSentence"
+            style="@style/TEXTVIEW_VOCAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-
             android:text="Số câu: "
-            android:textColor="#000000"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/imIcon"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/SetenceCount"
+            style="@style/TEXTVIEW_VOCAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:text="20"
-            android:textColor="#000000"
+            android:text="10"
             app:layout_constraintLeft_toRightOf="@+id/tvDoneSentence"
             app:layout_constraintTop_toTopOf="parent" />
 
         <!--        Trả lời đúng-->
         <TextView
             android:id="@+id/tvAnwserRight"
+            style="@style/TEXTVIEW_VOCAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:text="Thời gian:"
-            android:textColor="#000000"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/imIcon"
             app:layout_constraintTop_toBottomOf="@id/tvDoneSentence" />
@@ -62,23 +64,23 @@
 
         <TextView
             android:id="@+id/AnwserCount"
+            style="@style/TEXTVIEW_VOCAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="4dp"
             android:text="5:00"
-            android:textColor="#000000"
             app:layout_constraintLeft_toRightOf="@id/tvAnwserRight"
             app:layout_constraintTop_toBottomOf="@id/SetenceCount" />
 
         <TextView
             android:id="@+id/tvDone"
+            style="@style/TEXTVIEW_VOCAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:text="Hoàn thành"
-            android:textColor="#000000"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/imIcon"
             app:layout_constraintTop_toBottomOf="@id/tvAnwserRight" />
@@ -95,16 +97,17 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--    Hiển thị câu hỏi-->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="250dp">
 
         <LinearLayout
+            style="@style/Card_View"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/radius_background"
             android:orientation="vertical"
             android:padding="15dp">
 
@@ -113,26 +116,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="Mức điểm"
-                android:textColor="#0B6159"
+                android:textColor="#009688"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvEnglish"
+                style="@style/TEXTVIEW_VOCAB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="30 - 50"
-                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/tvTiengViet"
+                style="@style/TEXTVIEW_VOCAB"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="Description"
-                android:textColor="#000000"
+                android:text="Describe"
                 android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
@@ -140,9 +143,9 @@
     <Button
         android:id="@+id/btStartExam"
         android:layout_width="300dp"
-        android:layout_marginTop="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:layout_marginTop="50dp"
         android:background="@drawable/custom_button"
         android:text="Bắt đầu nào"
         android:textColor="#FFFFFF"

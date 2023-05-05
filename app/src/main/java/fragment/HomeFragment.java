@@ -57,7 +57,7 @@ public class HomeFragment extends Fragment {
                         openFillSentence();
                         break;
                     case R.id.btFillParagraph:
-                        openFillSentence();
+                        openFillParagraph();
                         break;
                     case R.id.btReadAndUndersand:
                         openReadAndUndersand();
@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
                         startActivity(i);
                         break;
                     case R.id.btTest:
-                        openTestFragment();
+//                        openTestFragment();
                     case R.id.btVocabulary:
                         Intent i1 = new Intent(getActivity(), VocabCatActivity.class);
                         startActivity(i1);
@@ -78,22 +78,27 @@ public class HomeFragment extends Fragment {
     }
 
     private void openFillSentence(){
-        Intent intent = new Intent(getActivity(), PracFillSentenceActivity.class);
+        Intent intent = new Intent(getActivity(), PracticeDesPageActivity.class);
+        intent.putExtra("Question_cate",1);
+
         startActivity(intent);
     }
     private void openFillParagraph(){
         Intent intent = new Intent(getActivity(),PracticeDesPageActivity.class);
+
+        intent.putExtra("Question_cate",2);
         startActivity(intent);
     }
     private void openReadAndUndersand(){
         Intent intent = new Intent(getActivity(),PracticeDesPageActivity.class);
+        intent.putExtra("Question_cate",3);
+
         startActivity(intent);
     }
 
     private void openTestFragment(){
         Intent intent = new Intent(getActivity(), TestFragment.class);
         startActivity(intent);
-        
     }
 
 

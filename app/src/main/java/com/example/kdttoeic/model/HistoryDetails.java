@@ -1,5 +1,8 @@
 package com.example.kdttoeic.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class HistoryDetails {
     public HistoryDetails(int id, int idHistory, int selectedOptionUser, int correctAnswer, int idQuestion) {
         this.id = id;
@@ -9,11 +12,21 @@ public class HistoryDetails {
         this.idQuestion = idQuestion;
     }
 
+    @SerializedName("id")
+    @Expose
     int id;
+    @SerializedName("idHistory")
+    @Expose
     int idHistory;
+    @SerializedName("selectedOptionUser")
+    @Expose
     int selectedOptionUser;
+    @SerializedName("correctAnswer")
+    @Expose
     int correctAnswer;
-
+    @SerializedName("idQuestion")
+    @Expose
+    int idQuestion;
     public int getCorrectAnswer() {
         return correctAnswer;
     }
@@ -30,7 +43,7 @@ public class HistoryDetails {
         this.idQuestion = idQuestion;
     }
 
-    int idQuestion;
+
 
     public int getId() {
         return id;

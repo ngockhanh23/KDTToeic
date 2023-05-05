@@ -68,5 +68,7 @@ public class HistoryDetailsActivity extends AppCompatActivity implements History
         intent.putExtra("selectOptionUser", historyDetails.getSelectedOptionUser());
         intent.putExtra("correctAnswer", historyDetails.getCorrectAnswer());
         startActivity(intent);
+
+//        Toast.makeText(HistoryDetailsActivity.this, String.valueOf(historyDetails.getIdHistory()), Toast.LENGTH_SHORT).show();
     }
 }

@@ -10,7 +10,7 @@
         android:id="@+id/tvSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="List Empty"
+        android:text="Chưa có từ vựng"
         android:textSize="32dp"
         android:gravity="center"/>
 

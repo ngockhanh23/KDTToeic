@@ -8,6 +8,11 @@
         android:icon="@drawable/baseline_backup_24" />
 
     <item
+        android:id="@+id/mnRestoreDataHistory"
+        android:title="Phục hồi"
+        app:showAsAction="always"
+        android:icon="@drawable/baseline_restore_24" />
+    <item
         android:id="@+id/mnClearAllHistory"
         android:title="Xóa toàn bộ"
         app:showAsAction="always"

@@ -58,7 +58,6 @@ public class TestActivity extends AppCompatActivity {
 
         TextView cdTime = findViewById(R.id.cdTime);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         kdtToeicDB = new KDTToeicDB(TestActivity.this);
 
         AnhXa();
@@ -102,7 +101,7 @@ public class TestActivity extends AppCompatActivity {
         });
 
 //        Bundle bundle = getIntent().getExtras();
-        maxAmountQuestion = 5;
+        maxAmountQuestion = lstQuestion.size(); 
 
 
         //xử lý sự kiện khi click sang câu hỏi tiếp theo
@@ -130,7 +129,7 @@ public class TestActivity extends AppCompatActivity {
                     // Cap nhat du lieu bai lam len lich su bai lam
                     kdtToeicDB.updateHistory(lastHistory.getId(), countCorrectAnswer, maxAmountQuestion, score);
 
-                    // Dua du lieu len firestore
+
 //                    db.collection("Thi thu").document("" + lastHistory.getId())
 //                                    .set(kdtToeicDB.getHistory().get(kdtToeicDB.countHistory() - 1), SetOptions.merge());
 //
@@ -184,7 +183,7 @@ public class TestActivity extends AppCompatActivity {
 
 
 
-        cdt = new CountDownTimer(150000, 1000) {
+        cdt = new CountDownTimer(30000, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -208,7 +207,7 @@ public class TestActivity extends AppCompatActivity {
             }
         }.start();
 
-        getSupportActionBar().setTitle("Luyện tập");
+        getSupportActionBar().setTitle("Đề thi");
     }
 
     void changeTextSize(int textsize)
@@ -272,6 +271,6 @@ public class TestActivity extends AppCompatActivity {
     }
 
     void AddQuestion(){
-        lstQuestion = kdtToeicDB.getQuestion();
+        lstQuestion = kdtToeicDB.getQuestionTest(getIntent().getIntExtra("levelTest",1));
     }
 }
